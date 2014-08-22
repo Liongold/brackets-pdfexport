@@ -96,6 +96,21 @@ define(function (require, exports, module) {
 
     /**
      * @private
+     * @param {!string} title
+     * @param {!string} message
+     * @param {?string} inputFile
+     * @param {?string} outputFile
+     */
+    function _showErrorDialog(title, message, inputFile, outputFile) {
+        Dialogs.showModalDialog(
+            DefaultDialogs.DIALOG_ID_ERROR,
+            title,
+            StringUtils.format(message, inputFile, outputFile)
+        );
+    }
+
+    /**
+     * @private
      * @param {!string} pathname
      * @param {!blob} blob
      * @return {!promise}
@@ -130,15 +145,16 @@ define(function (require, exports, module) {
         }
 
         doc = editor.document;
+        inputFile = doc.file.fullPath;
 
-        /**
-         * @TODO Implement error dialog for unsupported file types
-         */
         if (!_isSupportedDocument(doc)) {
-            return;
+            return _showErrorDialog(
+                Nls.ERROR_UNSUPPORTED_FILE_TITLE,
+                Nls.ERROR_UNSUPPORTED_FILE_MSG,
+                inputFile
+            );
         }
 
-        inputFile = doc.file.fullPath;
         dialogTitle = StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(inputFile));
 
         dialog = Dialogs.showModalDialog(
