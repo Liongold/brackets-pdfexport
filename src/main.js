@@ -57,6 +57,14 @@ define(function (require, exports, module) {
 
     /**
      * @private
+     * @type {object.<string, string>}
+     */
+    var _selectors = {
+        fontSize: "#pdfexport-fontsize"
+    };
+
+    /**
+     * @private
      * @type {object.<string, function(object): string>}
      */
     var _templates = {
@@ -165,7 +173,7 @@ define(function (require, exports, module) {
                     FileUtils.getBaseName(inputFile) + ".pdf",
                     function _callback(err, pathname) {
                         _createPDF({
-                            fontSize: parseInt($element.find("#pdfexport-fontsize").val(), 10),
+                            fontSize: parseInt($element.find(_selectors.fontSize).val(), 10),
                             pathname: pathname,
                             text: doc.getText()
                         });
