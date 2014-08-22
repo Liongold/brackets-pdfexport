@@ -1,0 +1,23 @@
+{
+  "name": "pdfexport",
+  "version": "1.0.0",
+  "description": "Export a file or a selection to PDF.",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sbruchmann/brackets-pdfexport.git"
+  },
+  "title": "PDF Export",
+  "keywords": [
+    "export",
+    "pdf"
+  ],
+  "authors": [
+    {
+      "email": "hi@sbruchmann.me",
+      "name": "Steffen Bruchmann",
+      "url": "hi@sbruchmann.me"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/sbruchmann/brackets-pdfexport"
+}

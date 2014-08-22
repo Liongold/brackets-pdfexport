@@ -1,0 +1,6 @@
+{
+    "paths": {
+        "thirdparty/blob-stream": "thirdparty/blob-stream/blob-stream",
+        "thirdparty/pdfkit": "thirdparty/pdfkit/pdfkit"
+    }
+}
