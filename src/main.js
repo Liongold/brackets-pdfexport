@@ -81,6 +81,17 @@ define(function (require, exports, module) {
            .save()
            .end();
 
+        /**
+         * @TODO Research PDFKit errors in order to provide improved error messages
+         */
+        stream.on("error", function _handleError() {
+            _showErrorDialog(
+                Nls.ERROR_PDFKIT_TITLE,
+                Nls.ERROR_PDFKIT_MSG,
+                options.inputFile
+            );
+        });
+
         stream.on("finish", function _handlePDFCreation() {
             _writeFile(options.pathname, stream.toBlob({ type: _BLOB_TYPE }));
         });
@@ -190,6 +201,7 @@ define(function (require, exports, module) {
                     function _callback(err, pathname) {
                         _createPDF({
                             fontSize: parseInt($element.find(_selectors.fontSize).val(), 10),
+                            inputFile: inputFile,
                             pathname: pathname,
                             text: doc.getText()
                         });
