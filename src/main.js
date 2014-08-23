@@ -1,22 +1,19 @@
-define(function (require, exports, module) {
+define(function (require) {
     "use strict";
 
     // Dependencies
     var _ = brackets.getModule("thirdparty/lodash");
     var CommandManager = brackets.getModule("command/CommandManager");
     var Commands = brackets.getModule("command/Commands");
-    var blobStream = require("thirdparty/blob-stream");
     var DefaultDialogs = brackets.getModule("widgets/DefaultDialogs");
     var Dialogs = brackets.getModule("widgets/Dialogs");
     var EditorManager = brackets.getModule("editor/EditorManager");
     var exportDialogTemplate = require("text!htmlContent/export-dialog.html");
-    var ExtensionUtils = brackets.getModule("utils/ExtensionUtils");
     var FileSystem = brackets.getModule("filesystem/FileSystem");
     var FileUtils = brackets.getModule("file/FileUtils");
     var Menus = brackets.getModule("command/Menus");
-    var NodeDomain = brackets.getModule("utils/NodeDomain");
     var Nls = require("i18n!nls/strings");
-    var PDFDocument = require("thirdparty/pdfkit");
+    var PDFDocument = require("PDFDocument");
     var Strings = brackets.getModule("strings");
     var StringUtils = brackets.getModule("utils/StringUtils");
 
@@ -40,28 +37,6 @@ define(function (require, exports, module) {
     var _COMMAND_ID = "pdfexport.export";
 
     /**
-     * @const
-     * @private
-     * @type {string}
-     */
-    var _BLOB_TYPE = "application/pdf";
-
-    /**
-     * @private
-     * @type {NodeDomain}
-     */
-    var _fs = new NodeDomain(
-        "pdfexport.FileSystemDomain",
-        ExtensionUtils.getModulePath(module, "FileSystemDomain.js")
-    );
-
-    /**
-     * @private
-     * @type {string}
-     */
-    var _PDF_FONTFACE = "Courier";
-
-    /**
      * @private
      * @type {object.<string, string>}
      */
@@ -79,39 +54,22 @@ define(function (require, exports, module) {
 
     /**
      * @private
-     * @param {fontSize: number, pathname: string, text: string} options
-     */
-    function _createPDF(options) {
-        var pdf = new PDFDocument();
-        var stream = pdf.pipe(blobStream());
-
-        pdf.font(_PDF_FONTFACE, options.fontSize)
-           .text(options.text)
-           .save()
-           .end();
-
-        /**
-         * @TODO Research PDFKit errors in order to provide improved error messages
-         */
-        stream.on("error", function _handleError() {
-            _showErrorDialog(
-                Nls.ERROR_PDFKIT_TITLE,
-                Nls.ERROR_PDFKIT_MSG,
-                options.inputFile
-            );
-        });
-
-        stream.on("finish", function _handlePDFCreation() {
-            _writeFile(options.pathname, stream.toBlob({ type: _BLOB_TYPE }));
-        });
-    }
-
-    /**
-     * @private
      * return {boolean}
      */
     function _isSupportedDocument(doc) {
         return doc.language.getId() !== "binary";
+    }
+
+    /**
+     * @param {{fontSize: number, pathname: string, text: string}} options
+     */
+    function _savePDFFile(options) {
+        PDFDocument.create(options)
+            .fail(function _handleError() {
+                /**
+                 * @TODO Use error codes in order to simplify displaying of error dialogs
+                 */
+            });
     }
 
     /**
@@ -127,27 +85,6 @@ define(function (require, exports, module) {
             title,
             StringUtils.format(message, inputFile, outputFile)
         );
-    }
-
-    /**
-     * @private
-     * @param {!string} pathname
-     * @param {!blob} blob
-     * @return {!promise}
-     */
-    function _writeFile(pathname, blob) {
-        var deferred = new $.Deferred();
-        var reader = new FileReader();
-
-        reader.readAsDataURL(blob);
-        reader.onloadend = function onLoadEnd() {
-            /**
-             * @TODO Implement error dialog for write errors
-             */
-            _fs.exec("write", pathname, reader.result);
-        };
-
-        return deferred.promise();
     }
 
     /**
@@ -207,8 +144,8 @@ define(function (require, exports, module) {
                     dialogTitle,
                     FileUtils.getDirectoryPath(inputFile),
                     FileUtils.getBaseName(inputFile) + ".pdf",
-                    function _callback(err, pathname) {
-                        _createPDF({
+                    function _saveDialogCallback(err, pathname) {
+                        _savePDFFile({
                             fontSize: parseInt($element.find(_selectors.fontSize).val(), 10),
                             inputFile: inputFile,
                             pathname: pathname,
