@@ -26,11 +26,9 @@ define(function (require, exports) {
 
     /**
      * @private
-     * @type {object.<string, function(object): string>}
+     * @type {string}
      */
-    var _templates = {
-        exportDialog: _.template(require("text!htmlContent/export-dialog.html"))
-    };
+    var _exportDialogTemplate = _.template(require("text!htmlContent/export-dialog.html"));
 
     /**
      * @private
@@ -59,9 +57,7 @@ define(function (require, exports) {
         dialog = Dialogs.showModalDialog(
             DefaultDialogs.DIALOG_ID_INFO,
             StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(inputFile)),
-            _templates.exportDialog({
-                Nls: Nls
-            }),
+            _exportDialogTemplate({ Nls: Nls }),
             [
                 {
                     className: Dialogs.DIALOG_BTN_CLASS_NORMAL,
