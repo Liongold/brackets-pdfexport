@@ -52,7 +52,7 @@ define(function (require, exports, module) {
 
     /**
      * @private
-     * @param {fontSize: number, pathname: string, text: string} options
+     * @param {{fontSize: number, pathname: string, text: string}} options
      * @return {!promise}
      */
     function create(options) {
