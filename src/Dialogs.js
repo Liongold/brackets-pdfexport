@@ -14,12 +14,6 @@ define(function (require, exports) {
      * @const
      * @private
      */
-    var _ACTION_CANCEL = Dialogs.DIALOG_BTN_CANCEL;
-
-    /**
-     * @const
-     * @private
-     */
     var _ACTION_SAVEAS = Dialogs.DIALOG_BTN_SAVE_AS;
 
     /**
@@ -71,7 +65,7 @@ define(function (require, exports) {
             [
                 {
                     className: Dialogs.DIALOG_BTN_CLASS_NORMAL,
-                    id: _ACTION_CANCEL,
+                    id: Dialogs.DIALOG_BTN_CANCEL,
                     text: Strings.CANCEL
                 },
                 {
