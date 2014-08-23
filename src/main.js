@@ -57,6 +57,12 @@ define(function (require, exports, module) {
 
     /**
      * @private
+     * @type {string}
+     */
+    var _PDF_FONTFACE = "Courier";
+
+    /**
+     * @private
      * @type {object.<string, string>}
      */
     var _selectors = {
@@ -75,8 +81,7 @@ define(function (require, exports, module) {
         var pdf = new PDFDocument();
         var stream = pdf.pipe(blobStream());
 
-        pdf.fontSize(options.fontSize)
-           .font("Courier")
+        pdf.font(_PDF_FONTFACE, options.fontSize)
            .text(options.text)
            .save()
            .end();
