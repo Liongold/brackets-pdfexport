@@ -77,6 +77,10 @@ define(function (require, exports, module) {
         exportDialog: _.template(exportDialogTemplate)
     };
 
+    /**
+     * @private
+     * @param {fontSize: number, pathname: string, text: string} options
+     */
     function _createPDF(options) {
         var pdf = new PDFDocument();
         var stream = pdf.pipe(blobStream());
