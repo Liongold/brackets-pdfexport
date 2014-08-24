@@ -47,9 +47,6 @@ define(function (require) {
         var editor = EditorManager.getActiveEditor();
         var doc, srcFile;
 
-        /**
-         * @TODO Implement error dialog for nullified editor
-         */
         if (!editor) {
             return;
         }
