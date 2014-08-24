@@ -45,7 +45,7 @@ define(function (require) {
      */
     function exportAsPdf() {
         var editor = EditorManager.getActiveEditor();
-        var doc, inputFile;
+        var doc, srcFile;
 
         /**
          * @TODO Implement error dialog for nullified editor
@@ -55,29 +55,29 @@ define(function (require) {
         }
 
         doc = editor.document;
-        inputFile = doc.file.fullPath;
+        srcFile = doc.file.fullPath;
 
         if (!_isSupportedDocument(doc)) {
             Dialogs.showErrorDialog(
                 Nls.ERROR_UNSUPPORTED_FILE_TITLE,
                 Nls.ERROR_UNSUPPORTED_FILE_MSG,
-                inputFile
+                srcFile
             );
         }
 
-        Dialogs.showExportDialog(inputFile).then(function _callback(options) {
+        Dialogs.showExportDialog(srcFile).then(function _callback(options) {
             if (!options) {
                 return;
             }
 
             FileSystem.showSaveDialog(
-                StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(inputFile)),
-                FileUtils.getDirectoryPath(inputFile),
-                FileUtils.getBaseName(inputFile) + ".pdf",
+                StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(srcFile)),
+                FileUtils.getDirectoryPath(srcFile),
+                FileUtils.getBaseName(srcFile) + ".pdf",
                 function _saveDialogCallback(err, pathname) {
                     _savePDFFile({
                         fontSize: options.fontSize,
-                        inputFile: inputFile,
+                        srcFile: srcFile,
                         pathname: pathname,
                         text: doc.getText()
                     });
