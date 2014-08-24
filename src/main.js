@@ -70,8 +70,6 @@ define(function (require) {
                 return;
             }
 
-            console.log(options.fontSize);
-
             FileSystem.showSaveDialog(
                 StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(inputFile)),
                 FileUtils.getDirectoryPath(inputFile),
