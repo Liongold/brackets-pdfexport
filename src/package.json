@@ -1,23 +1,13 @@
 {
-  "name": "pdfexport",
-  "version": "1.0.0",
-  "description": "Export a file or a selection to PDF.",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:sbruchmann/brackets-pdfexport.git"
-  },
-  "title": "PDF Export",
-  "keywords": [
-    "export",
-    "pdf"
-  ],
-  "authors": [
-    {
-      "email": "hi@sbruchmann.me",
-      "name": "Steffen Bruchmann",
-      "url": "hi@sbruchmann.me"
-    }
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/sbruchmann/brackets-pdfexport"
+    "name": "ExportPDF",
+    "version": "0.2",
+    "title": "PDF Export",
+    "description": "Export a file or a selection to PDf.",
+    "homepage": "https://github.com/Liongold/brackets-pdfexport",
+    "author": "Jean Spiteri <beimaginativeegroup@gmail.com>, Steffen Bruchmann <hi@sbruchmann.me>",
+    "license": "MIT",
+    "keywords": [
+        "export",
+        "pdf"
+    ]
 }
