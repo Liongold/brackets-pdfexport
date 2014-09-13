@@ -44,7 +44,9 @@ define(function (require, exports, module) {
             /**
              * @TODO Implement error dialog for write errors
              */
-            _fs.exec("write", pathname, reader.result);
+            _fs.exec("write", pathname, reader.result)
+                .fail(deferred.reject.bind(deferred))
+                .then(deferred.resolve.bind(deferred));
         };
 
         return deferred.promise();
@@ -83,6 +85,11 @@ define(function (require, exports, module) {
         return deferred.promise();
     }
 
+    function open(pathname) {
+        _fs.exec("open", pathname);
+    }
+
     // Define public API
     exports.create = create;
+    exports.open = open;
 });

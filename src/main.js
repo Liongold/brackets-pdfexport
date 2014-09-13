@@ -37,6 +37,9 @@ define(function (require) {
                 /**
                  * @TODO Use error codes in order to simplify displaying of error dialogs
                  */
+            })
+            .then(function() {
+                PDFDocument.open(options.pathname);
             });
     }
 
