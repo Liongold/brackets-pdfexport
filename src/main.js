@@ -45,7 +45,7 @@ define(function (require) {
      */
     function exportAsPdf() {
         var editor = EditorManager.getActiveEditor();
-        var doc, srcFile;
+        var doc, srcFile, text;
 
         if (!editor) {
             return;
@@ -67,6 +67,12 @@ define(function (require) {
                 return;
             }
 
+            if(options.content === "selection") {
+                text = editor.getSelectedText();
+            }else{
+                text = doc.getText();
+            }
+
             FileSystem.showSaveDialog(
                 StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(srcFile)),
                 FileUtils.getDirectoryPath(srcFile),
@@ -76,7 +82,7 @@ define(function (require) {
                         fontSize: options.fontSize,
                         srcFile: srcFile,
                         pathname: pathname,
-                        text: doc.getText()
+                        text: text
                     });
                 }
             );
