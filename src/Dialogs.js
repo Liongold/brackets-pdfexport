@@ -21,7 +21,8 @@ define(function (require, exports) {
      * @type {object.<string, string>}
      */
     var _selectors = {
-        fontSize: "#pdfexport-fontsize"
+        fontSize: "#pdfexport-fontsize",
+        openPdf: "#pdfexport-openpdf"
     };
 
     /**
@@ -77,7 +78,8 @@ define(function (require, exports) {
 
             if (action === _ACTION_SAVEAS) {
                 response = {
-                    fontSize: parseInt($element.find(_selectors.fontSize).val(), 10)
+                    fontSize: parseInt($element.find(_selectors.fontSize).val(), 10),
+                    openPdf: $element.find(_selectors.openPdf).prop("checked")
                 };
             }
 

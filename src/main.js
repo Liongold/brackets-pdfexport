@@ -29,7 +29,7 @@ define(function (require) {
     }
 
     /**
-     * @param {{fontSize: number, pathname: string, text: string}} options
+     * @param {{fontSize: number, openPdf: boolean, pathname: string, text: string}} options
      */
     function _savePDFFile(options) {
         PDFDocument.create(options)
@@ -37,6 +37,11 @@ define(function (require) {
                 /**
                  * @TODO Use error codes in order to simplify displaying of error dialogs
                  */
+            })
+            .then(function() {
+                if (options.openPdf) {
+                    PDFDocument.open(options.pathname);
+                }
             });
     }
 
@@ -74,6 +79,7 @@ define(function (require) {
                 function _saveDialogCallback(err, pathname) {
                     _savePDFFile({
                         fontSize: options.fontSize,
+                        openPdf: options.openPdf,
                         srcFile: srcFile,
                         pathname: pathname,
                         text: doc.getText()
