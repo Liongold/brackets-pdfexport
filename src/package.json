@@ -6,15 +6,18 @@
   "homepage": "https://github.com/Liongold/brackets-pdfexport",
   "author": "Jean Spiteri <beimaginativeegroup@gmail.com>",
   "contributors": [
-      {
-          "email": "hi@sbruchmann.me",
-          "name": "Steffen Bruchmann",
-          "url": "http://sbruchmann.me"
-      }
+    {
+      "email": "hi@sbruchmann.me",
+      "name": "Steffen Bruchmann",
+      "url": "http://sbruchmann.me"
+    }
   ],
   "license": "MIT",
   "keywords": [
-      "export",
-      "pdf"
-  ]
+    "export",
+    "pdf"
+  ],
+  "dependencies": {
+    "opn": "^1.0.0"
+  }
 }
