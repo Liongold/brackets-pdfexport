@@ -68,7 +68,42 @@ define(function (require) {
             }
 
             if(options.content === "selection") {
-                text = editor.getSelectedText();
+                var lines = text.split("\n");
+                var differences = [];
+                for(var i = 1; i < lines.length; i++) {
+                    var line = lines[i];
+                    var originallength = line.length;
+                    var newlength = line.trim().length;
+                    differences.push(originallength - newlength);
+                }
+                var smallestspace = "";
+                for(var k = 0; k < differences.length; k++) {
+                    if(smallestspace === "" || smallestspace > differences[k]) {
+                        smallestspace = differences[k];
+                    }
+                }
+                text = "";
+                for(i = 0; i < lines.length; i++) {
+                    if(i !== 0) {
+                        var linetext = lines[i];
+                        var newaddition = linetext.substr(smallestspace);
+                        text+=newaddition;
+                        text+="\n";
+                    }else{
+                        var str = "";
+                        var cursor = editor.getCursorPos(true, "start").ch;
+                        if(cursor > smallestspace) {
+                            for(var j = 0; j < (cursor-smallestspace); j++) {
+                                str+=" ";
+                            }
+                            linetext = str + lines[0];
+                        }else{
+                            linetext = lines[0];
+                        }
+                        text+=linetext;
+                        text+="\n";
+                    }
+                }
             }else{
                 text = doc.getText();
             }
