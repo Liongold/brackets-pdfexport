@@ -103,11 +103,9 @@ define(function (require) {
                         } else {
                             linetext = lines[0];
                         }
-                        text += linetext;
-                        text += "\n";
+                        text = linetext + "\n"; 
                     }
                 }
-    
             } else {
                 text = doc.getText();
             }
