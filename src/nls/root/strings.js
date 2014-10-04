@@ -7,5 +7,5 @@ define({
     "ERROR_UNSUPPORTED_FILE_TITLE": "Unsupported File",
     "LABEL_FONTSIZE":               "Font Size",
     "LABEL_SELECTION":              "Selection",
-    "LABEL_WHOLE_FILE":             "Whole File"
+    "LABEL_CURRENT_FILE":           "Current File"
 });
