@@ -96,9 +96,7 @@ define(function (require) {
                         str = "";
                         cursor = editor.getCursorPos(true, "start").ch;
                         if (cursor > smallestspace) {
-                            for (j = 0; j < (cursor - smallestspace); j++) {
-                                str += " ";
-                            }
+                            str += (new Array(cursor - smallestspace)).join(" ");
                             linetext = str + lines[0];
                         } else {
                             linetext = lines[0];
