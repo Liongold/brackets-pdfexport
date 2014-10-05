@@ -45,7 +45,7 @@ define(function (require) {
      */
     function exportAsPdf() {
         var editor = EditorManager.getActiveEditor();
-        var doc, srcFile, text, lines, differences, i, line, originallength, newlength, smallestspace, k, linetext, newaddition, str, cursor, j;
+        var cursor, differences, doc, i, j, k, line, lineText, lines, newAddition, newLength, originalLength, smallestSpace, srcFile, str, text;
 
         if (!editor) {
             return;
@@ -73,35 +73,34 @@ define(function (require) {
 
                 for (i = 1; i < lines.length; i++) {
                     line = lines[i];
-                    originallength = line.length;
-                    newlength = line.trim().length;
-                    differences.push(originallength - newlength);
+                    originalLength = line.length;
+                    newLength = line.trim().length;
+                    differences.push(originalLength - newLength);
                 }
 
-                smallestspace = "";
+                smallestSpace = "";
                 for (k = 0; k < differences.length; k++) {
-                    if (smallestspace === "" || smallestspace > differences[k]) {
-                        smallestspace = differences[k];
+                    if (smallestSpace === "" || smallestSpace > differences[k]) {
+                        smallestSpace = differences[k];
                     }
                 }
 
                 text = "";
                 for (i = 0; i < lines.length; i++) {
                     if (i !== 0) {
-                        linetext = lines[i];
-                        newaddition = linetext.substr(smallestspace);
-                        text += newaddition;
-                        text += "\n";
+                        lineText = lines[i];
+                        newAddition = lineText.substr(smallestSpace);
+                        text = newAddition + "\n";
                     } else {
                         str = "";
                         cursor = editor.getCursorPos(true, "start").ch;
-                        if (cursor > smallestspace) {
-                            str += (new Array(cursor - smallestspace)).join(" ");
-                            linetext = str + lines[0];
+                        if (cursor > smallestSpace) {
+                            str += (new Array(cursor - smallestSpace)).join(" ");
+                            lineText = str + lines[0];
                         } else {
-                            linetext = lines[0];
+                            lineText = lines[0];
                         }
-                        text = linetext + "\n"; 
+                        text = lineText + "\n"; 
                     }
                 }
             } else {
