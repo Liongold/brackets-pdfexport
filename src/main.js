@@ -71,7 +71,7 @@ define(function (require) {
                 lines = text.split("\n");
                 differences = [];
 
-                for (i = 1; i < lines.length; i++) {
+                for (i = 0; i < lines.length; i++) {
                     line = lines[i];
                     originalLength = line.length;
                     newLength = line.trim().length;
