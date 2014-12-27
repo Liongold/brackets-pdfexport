@@ -2,6 +2,7 @@
 
 // Dependencies
 var fs = require("fs");
+var opn = require("opn");
 
 /**
  * @const
@@ -22,6 +23,7 @@ function init(manager) {
         });
     }
     manager.registerCommand(_DOMAIN_ID, "write", write, true);
+    manager.registerCommand(_DOMAIN_ID, "open", opn);
 }
 
 /**
