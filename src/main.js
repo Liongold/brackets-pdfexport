@@ -44,8 +44,10 @@ define(function (require) {
      * @TODO Refactor this function to use more abstractions
      */
     function exportAsPdf() {
-        var editor = EditorManager.getActiveEditor();
-        var cursor, differences, doc, i, j, k, line, lineText, lines, newAddition, newLength, originalLength, smallestSpace, srcFile, str, text;
+        var editor = EditorManager.getActiveEditor(),
+            text = "",
+            smallestSpace = 0;
+        var cursorStart, difference, doc, i, indent, line, lines, newLength, newLine, numberOfLines, originalLength, smallestSpace, selectedText, srcFile, text;
 
         if (!editor) {
             return;
@@ -68,90 +70,43 @@ define(function (require) {
             }
 
             if (options.content === "selection") {
-            /*    text = editor.getSelectedText();
-                lines = text.split("\n");
-                differences = [];
-                
-                for (i = 0; i < lines.length; i++) {
-                    line = lines[i];
-                    originalLength = line.length;
-                    newLength = line.trim().length;
-                    differences.push(originalLength - newLength);
-                }
-                
-                smallestSpace = "";
-                for (k = 0; k < differences.length; k++) {
-                    if (smallestSpace === "" || smallestSpace > differences[k]) {
-                        smallestSpace = differences[k];
-                    }
-                }
-                
-                text = "";
-                for (i = 0; i < lines.length; i++) {
-                    if (i !== 0) {
-                        lineText = lines[i];
-                        newAddition = lineText.substr(smallestSpace);
-                        text += newAddition;
-                        text += "\n";
-                    } else {
-                        str = "";
-                        cursor = editor.getCursorPos(true, "start").ch; 
-                        
-                        if (cursor > smallestSpace) { */
-                            /*for (j = 0; j < (cursor - smallestSpace); j++) {
-                                str += " ";
-                            }*/
-             /*               str += (new Array(cursor - smallestSpace)).join(" ");
-                            lineText = str + lines[0];
-                        } else {
-                            lineText = lines[0];
-                        }
-                        
-                        text = lineText + "\n"; 
-                    } */
-                //console.log(editor.getSelectedText());
-                //console.log(editor.getCursorPos(true, "start").ch);
-                
-                //Determine smallest space between col 0 and text
-                text = "", smallestSpace = 0;
-                var cursorStart = editor.getCursorPos(true, "start").ch;
-                console.log(cursorStart);
-                var selectedText = editor.getSelectedText();
+                cursorStart = editor.getCursorPos(true, "start").ch;
+                selectedText = editor.getSelectedText();
                 lines = selectedText.split("\n");
-                var numberOfLines = lines.length;
-                for(var i = 0; i < numberOfLines; i++){
+                numberOfLines = lines.length;
+                
+                for (i = 0; i < numberOfLines; i++) {
                     line = lines[i];
                     originalLength = line.length;
                     newLength = line.trim().length;
                     difference = originalLength - newLength;
-                    console.log(difference);
-                    if(difference == 0) {
-                        smallestSpace = cursorStart;
+                    
+                    if (difference == 0 && i == 0) {
+                        difference = cursorStart;
                     }
-                    if(difference < smallestSpace || i == 0) {
+                    
+                    if (difference < smallestSpace || i == 0) {
                         smallestSpace = difference;
                     }
-                    console.log(smallestSpace);
                 }
-                //Remove amount of whitespace equivalent to smallestSpace
-                var indent = (new Array(smallestSpace)).join(" ");
-                console.log(indent);
-                if(smallestSpace != 0) {
-                    var regexp = new RegExp(/*"/"+*/indent+"{1}");
+
+                indent = (new Array(smallestSpace)).join(" ");
+
+                if (smallestSpace != 0) {
+                    var regexp = new RegExp(indent+"{1}");
                 }
-                console.log(regexp);
-                for(var i = 0; i < numberOfLines; i++) {
+
+                for (i = 0; i < numberOfLines; i++) {
                     line = lines[i];
-                    if(i == 0 && cursorStart != 0) {
-                        line = (new Array(cursorStart)).join(" ") + line;
-                        //
+                    
+                    if (i == 0 && cursorStart != 0) {
+                        line = (new Array(cursorStart)).join(" ") + " " + line;
                     }
+                    
                     var newLine = line.replace(regexp, "");
-                    console.log(newLine);
                     text += newLine + "\n";
-                }
-                //}
-                //return;            
+                }  
+                
             } else {
                 text = doc.getText();
             }
