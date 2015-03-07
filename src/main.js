@@ -44,8 +44,10 @@ define(function (require) {
      * @TODO Refactor this function to use more abstractions
      */
     function exportAsPdf() {
-        var editor = EditorManager.getActiveEditor();
-        var doc, srcFile;
+        var editor = EditorManager.getActiveEditor(),
+            text = "",
+            smallestSpace = 0;
+        var cursorStart, difference, doc, i, indent, line, lines, newLength, newLine, numberOfLines, originalLength, smallestSpace, selectedText, srcFile, text;
 
         if (!editor) {
             return;
@@ -67,6 +69,48 @@ define(function (require) {
                 return;
             }
 
+            if (options.content === "selection") {
+                cursorStart = editor.getCursorPos(true, "start").ch;
+                selectedText = editor.getSelectedText();
+                lines = selectedText.split("\n");
+                numberOfLines = lines.length;
+                
+                for (i = 0; i < numberOfLines; i++) {
+                    line = lines[i];
+                    originalLength = line.length;
+                    newLength = line.trim().length;
+                    difference = originalLength - newLength;
+                    
+                    if (difference == 0 && i == 0) {
+                        difference = cursorStart;
+                    }
+                    
+                    if (difference < smallestSpace || i == 0) {
+                        smallestSpace = difference;
+                    }
+                }
+
+                indent = (new Array(smallestSpace)).join(" ");
+
+                if (smallestSpace != 0) {
+                    var regexp = new RegExp(indent+"{1}");
+                }
+
+                for (i = 0; i < numberOfLines; i++) {
+                    line = lines[i];
+                    
+                    if (i == 0 && cursorStart != 0) {
+                        line = (new Array(cursorStart)).join(" ") + " " + line;
+                    }
+                    
+                    var newLine = line.replace(regexp, "");
+                    text += newLine + "\n";
+                }  
+                
+            } else {
+                text = doc.getText();
+            }
+
             FileSystem.showSaveDialog(
                 StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(srcFile)),
                 FileUtils.getDirectoryPath(srcFile),
@@ -76,7 +120,7 @@ define(function (require) {
                         fontSize: options.fontSize,
                         srcFile: srcFile,
                         pathname: pathname,
-                        text: doc.getText()
+                        text: text
                     });
                 }
             );

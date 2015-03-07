@@ -9,6 +9,14 @@
                     <input min="1" id="pdfexport-fontsize" step="1" type="number" value="10" />
                 </div>
             </div>
+            <div class="control-group">
+                <label>
+                    <input type="radio" name="pdfexport-content" value="selection" /> <%= Nls.LABEL_SELECTION %>
+                </label>
+                <label>
+                    <input type="radio" name="pdfexport-content" value="whole" /> <%= Nls.LABEL_CURRENT_FILE %>
+                </label>
+            </div>
         </form>
     </div>
 </div>
