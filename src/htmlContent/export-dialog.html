@@ -1,22 +1,64 @@
-<div class="row">
-    <div class="span6">
-        <form class="form-horizontal">
-            <div class="control-group">
-                <label class="control-label" for="pdfexport-fontsize">
-                    <%= Nls.LABEL_FONTSIZE %>
-                </label>
-                <div class="controls">
-                    <input min="1" id="pdfexport-fontsize" step="1" type="number" value="10" />
+<form class="form-inline">
+    <div class="row">
+        <div class="span3">
+            <div class="row">
+                <div class="span3">
+                    <div class="control-group text-center">
+                        <label class="sr-only" for="docTopMargin"></label>
+                        <input type="number" id="docTopMargin" style="width:35px" min="0" step="1" value="<%= Preferences.getPreference('topMargin') %>">
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="row">
+                        <div class="span1">
+                            <div class="control-group">
+                                <label class="sr-only" for="docLeftMargin"></label>
+                                <input type="number" id="docLeftMargin" style="width:35px" min="0" step="1" value="<%= Preferences.getPreference('leftMargin') %>">
+                            </div>
+                        </div>
+                        <div class="span1 text-center">
+                            <em><%= Nls.LABEL_MARGINS %></em>
+                        </div>
+                        <div class="span1">
+                            <div class="control-group">
+                                <label class="sr-only" for="docRightMargin"></label>
+                                <input type="number" id="docRightMargin" style="width:35px" min="0" step="1" value="<%= Preferences.getPreference('rightMargin') %>">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="control-group text-center">
+                        <label class="sr-only" for="docBottomMargin"></label>
+                        <input type="number" id="docBottomMargin" style="width:35px" min="0" step="1" value="<%= Preferences.getPreference('bottomMargin') %>">
+                    </div>
                 </div>
             </div>
-            <div class="control-group">
-                <label>
-                    <input type="radio" name="pdfexport-content" value="selection" /> <%= Nls.LABEL_SELECTION %>
-                </label>
-                <label>
-                    <input type="radio" name="pdfexport-content" value="whole" /> <%= Nls.LABEL_CURRENT_FILE %>
-                </label>
-            </div>
-        </form>
+        </div>
+        <div class="span3">
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label radio" for="pdfexport-contentselected">
+                        <input type="radio" name="pdfexport-content" value="selection" id="pdfexport-contentselected" <% if(Preferences.getPreference('rangeExport') === 'selection') { %>checked<% } %>> <%= Nls.LABEL_EXPORT_SELECTION %>
+                    </label>
+                    <label class="radio" for="pdfexport-contentwhole">
+                        <input type="radio" name="pdfexport-content" value="whole" id="pdfexport-contentwhole" <% if(Preferences.getPreference('rangeExport') === 'whole') { %>checked<% } %>> <%= Nls.LABEL_EXPORT_CURRENT_FILE %>
+                    </label>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        <%= Nls.LABEL_FONTSIZE %>
+                    </label>
+                    <div class="controls">
+                        <input type="number" min="1" id="pdfexport-fontsize" step="1" value="<%= Preferences.getPreference('fontSize') %>">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="checkbox" for="pdfexport-openfile">
+                        <input type="checkbox" <% if(Preferences.getPreference('openAfterExport')) { %>checked<% } %> id="pdfexport-openfile"><%= Nls.LABEL_OPENPDF %>
+                    </label>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+</form>
