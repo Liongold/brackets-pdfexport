@@ -5,7 +5,7 @@
                 <div class="span3">
                     <div class="control-group text-center">
                         <label class="sr-only" for="docTopMargin"></label>
-                        <input type="number" id="docTopMargin" style="width:35px" min="0" step="1">
+                        <input type="number" id="docTopMargin" style="width:35px" min="0" step="1" value="<%= Preferences.getPreference('topMargin') %>">
                     </div>
                 </div>
                 <div class="span3">
@@ -13,7 +13,7 @@
                         <div class="span1">
                             <div class="control-group">
                                 <label class="sr-only" for="docLeftMargin"></label>
-                                <input type="number" id="docLeftMargin" style="width:35px" min="0" step="1">
+                                <input type="number" id="docLeftMargin" style="width:35px" min="0" step="1" value="<%= Preferences.getPreference('leftMargin') %>">
                             </div>
                         </div>
                         <div class="span1 text-center">
@@ -22,7 +22,7 @@
                         <div class="span1">
                             <div class="control-group">
                                 <label class="sr-only" for="docRightMargin"></label>
-                                <input type="number" id="docRightMargin" style="width:35px" min="0" step="1">
+                                <input type="number" id="docRightMargin" style="width:35px" min="0" step="1" value="<%= Preferences.getPreference('rightMargin') %>">
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                 <div class="span3">
                     <div class="control-group text-center">
                         <label class="sr-only" for="docBottomMargin"></label>
-                        <input type="number" id="docBottomMargin" style="width:35px" min="0" step="1">
+                        <input type="number" id="docBottomMargin" style="width:35px" min="0" step="1" value="<%= Preferences.getPreference('bottomMargin') %>">
                     </div>
                 </div>
             </div>
@@ -39,10 +39,10 @@
             <form class="form-horizontal">
                 <div class="control-group">
                     <label class="control-label radio" for="pdfexport-contentselected">
-                        <input type="radio" name="pdfexport-content" value="selection" id="pdfexport-contentselected"> Export Selection
+                        <input type="radio" name="pdfexport-content" value="selection" id="pdfexport-contentselected" <% if(Preferences.getPreference('rangeExport') === 'selection') { %>checked<% } %>> Export Selection
                     </label>
                     <label class="radio" for="pdfexport-contentwhole">
-                        <input type="radio" name="pdfexport-content" value="whole" id="pdfexport-contentwhole"> Export Current File
+                        <input type="radio" name="pdfexport-content" value="whole" id="pdfexport-contentwhole" <% if(Preferences.getPreference('rangeExport') === 'whole') { %>checked<% } %>> Export Current File
                     </label>
                 </div>
                 <div class="control-group">
@@ -50,12 +50,12 @@
                         Font Size
                     </label>
                     <div class="controls">
-                        <input type="number" min="1" id="pdfexport-fontsize" step="1" value="10">
+                        <input type="number" min="1" id="pdfexport-fontsize" step="1" value="<%= Preferences.getPreference('fontSize') %>">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="checkbox" for="pdfexport-openfile">
-                        <input type="checkbox" checked id="pdfexport-openfile"> Open with default application after export
+                        <input type="checkbox" checked id="pdfexport-openfile" <% if(Preferences.getPreference('openAfterExport')) { %>checked<% } %>> Open with default application after export
                     </label>
                 </div>
             </form>
