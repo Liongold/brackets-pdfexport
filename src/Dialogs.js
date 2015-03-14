@@ -7,6 +7,7 @@ define(function (require, exports) {
     var Dialogs = brackets.getModule("widgets/Dialogs");
     var FileUtils = brackets.getModule("file/FileUtils");
     var Nls = require("i18n!nls/strings");
+    var Preferences = require("Preferences");
     var Strings = brackets.getModule("strings");
     var StringUtils = brackets.getModule("utils/StringUtils");
 
@@ -58,7 +59,7 @@ define(function (require, exports) {
         dialog = Dialogs.showModalDialog(
             DefaultDialogs.DIALOG_ID_INFO,
             StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(inputFile)),
-            _exportDialogTemplate({ Nls: Nls }),
+            _exportDialogTemplate({ Nls: Nls, Preferences: Preferences }),
             [
                 {
                     className: Dialogs.DIALOG_BTN_CLASS_NORMAL,
