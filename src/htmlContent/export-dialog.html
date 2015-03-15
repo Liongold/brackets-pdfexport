@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         <div class="span1 text-center">
-                            <em>Margins</em>
+                            <em><%= Nls.LABEL_MARGINS %></em>
                         </div>
                         <div class="span1">
                             <div class="control-group">
@@ -39,15 +39,15 @@
             <form class="form-horizontal">
                 <div class="control-group">
                     <label class="control-label radio" for="pdfexport-contentselected">
-                        <input type="radio" name="pdfexport-content" value="selection" id="pdfexport-contentselected" <% if(Preferences.getPreference('rangeExport') === 'selection') { %>checked<% } %>> Export Selection
+                        <input type="radio" name="pdfexport-content" value="selection" id="pdfexport-contentselected" <% if(Preferences.getPreference('rangeExport') === 'selection') { %>checked<% } %>> <%= Nls.LABEL_EXPORT_SELECTION %>
                     </label>
                     <label class="radio" for="pdfexport-contentwhole">
-                        <input type="radio" name="pdfexport-content" value="whole" id="pdfexport-contentwhole" <% if(Preferences.getPreference('rangeExport') === 'whole') { %>checked<% } %>> Export Current File
+                        <input type="radio" name="pdfexport-content" value="whole" id="pdfexport-contentwhole" <% if(Preferences.getPreference('rangeExport') === 'whole') { %>checked<% } %>> <%= Nls.LABEL_EXPORT_CURRENT_FILE %>
                     </label>
                 </div>
                 <div class="control-group">
                     <label class="control-label">
-                        Font Size
+                        <%= Nls.LABEL_FONTSIZE %>
                     </label>
                     <div class="controls">
                         <input type="number" min="1" id="pdfexport-fontsize" step="1" value="<%= Preferences.getPreference('fontSize') %>">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="control-group">
                     <label class="checkbox" for="pdfexport-openfile">
-                        <input type="checkbox" checked id="pdfexport-openfile" <% if(Preferences.getPreference('openAfterExport')) { %>checked<% } %>> Open with default application after export
+                        <input type="checkbox" <% if(Preferences.getPreference('openAfterExport')) { %>checked<% } %> id="pdfexport-openfile"><%= Nls.LABEL_OPENPDF %>
                     </label>
                 </div>
             </form>
