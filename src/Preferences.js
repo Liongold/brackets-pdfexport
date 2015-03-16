@@ -6,7 +6,12 @@ define(function (require, exports) {
     var extensionPrefs = PreferencesManager.getExtensionPrefs("brackets-pdfexport");
     var _ = brackets.getModule("thirdparty/lodash");
     
-    //Default Preferences
+    /**
+     * @const
+     * @private
+     * The default preferences to be set on first extension run
+     * @object
+     */
     var defaultPreferences = {
         "topMargin": { type: "number", value: 72}, //
         "leftMargin": { type: "number", value: 72 }, //
@@ -15,25 +20,29 @@ define(function (require, exports) {
         "fontSize": { type: "number", value: 10 },
         "rangeExport": { type: "string", value: "whole" },
         "openAfterExport": { type: "boolean", value: 1 }
-    }
+    };
     
-    //Check if each preferences is set, if not set it as the default preference value
-    _.each(defaultPreferences, function(definition, key, type, value) {
-        if(!extensionPrefs.get(key)) {
-            extensionPrefs.definePreference(key, definition.type, definition.value);
-        }
+    /**
+     * If preferences are not, set the default ones right now
+     */
+    _.each(defaultPreferences, function (definition, key, type, value) {
+        extensionPrefs.definePreference(key, definition.type, definition.value);
     });
     
+    /**
+     * @param {!string} key
+     * @return {!string}
+     */
     function get(key) {
         return extensionPrefs.get(key);
     }
     
+    /**
+     * @param {!string} key
+     * @param {!string/boolean/number} value
+     */
     function set(key, value) {
-        // Will be implemented later
-    }
-    
-    function getAllPreferences() {
-        // Will be implemented later
+        /* @TODO: Will be implemented later */
     }
     
     //Define public API
