@@ -8,6 +8,6 @@ define({
     "LABEL_FONTSIZE":               "Font Size",
     "LABEL_EXPORT_SELECTION":       "Export Selection",
     "LABEL_EXPORT_CURRENT_FILE":    "Export Current File",
-    "LABEL_MARGINS":                "Margins",
+    "LABEL_MARGINS":                "Margins (in printer points)",
     "LABEL_OPENPDF":                "Open PDF After Export"
 });
