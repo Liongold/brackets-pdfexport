@@ -3,8 +3,10 @@ define(function (require, exports, module) {
 
     // Dependencies
     var blobStream = require("thirdparty/blob-stream");
+    var Dialogs = require("Dialogs");
     var ExtensionUtils = brackets.getModule("utils/ExtensionUtils");
     var PDFKit = require("thirdparty/pdfkit");
+    var Nls = require("i18n!nls/strings");
     var NodeDomain = brackets.getModule("utils/NodeDomain");
 
     /**
@@ -41,10 +43,14 @@ define(function (require, exports, module) {
 
         reader.readAsDataURL(blob);
         reader.onloadend = function onLoadEnd() {
-            /**
-             * @TODO Implement error dialog for write errors
-             */
-            _fs.exec("write", pathname, reader.result);
+            _fs.exec("write", pathname, reader.result)
+                .fail(function(err) {
+                    Dialogs.showErrorDialog(
+                        Nls.ERROR_PDFKIT_TITLE,
+                        Nls.ERROR_WRITE_MSG,
+                        err.errno
+                    );
+            });
         };
 
         return deferred.promise();
