@@ -23,7 +23,7 @@ define(function (require, exports) {
      */
     var _selectors = {
         fontSize: "#pdfexport-fontsize",
-        content: "input[name='pdfexport-content']"
+        content: "input[name='pdfexport-content']:checked"
     };
 
     /**
