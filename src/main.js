@@ -29,7 +29,7 @@ define(function (require) {
     }
 
     /**
-     * @param {{fontSize: number, pathname: string, text: string}} options
+     * @param {{fontSize: number, pathname: string, text: string, margins: object}} options
      */
     function _savePDFFile(options) {
         PDFDocument.create(options)
@@ -120,7 +120,8 @@ define(function (require) {
                         fontSize: options.fontSize,
                         srcFile: srcFile,
                         pathname: pathname,
-                        text: text
+                        text: text,
+                        margins: options.margins
                     });
                 }
             );
