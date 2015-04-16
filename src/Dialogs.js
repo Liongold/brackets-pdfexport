@@ -16,14 +16,30 @@ define(function (require, exports) {
      * @private
      */
     var _ACTION_SAVEAS = Dialogs.DIALOG_BTN_SAVE_AS;
+    
+    /**
+     * @const
+     * @private
+     */
+    var _ACTION_OPEN_PREFERENCES = "open_preferences";
+    
+    /**
+     * @const
+     * @private
+     */
+    var _ACTION_SAVE_PREFERENCES = "save_preferences";
 
     /**
      * @private
      * @type {object.<string, string>}
      */
-    var _selectors = {
+    var _selectors = { 
+        bottomMargin: "#docBottomMargin",
+        content: "input[name='pdfexport-content']:checked",
         fontSize: "#pdfexport-fontsize",
-        content: "input[name='pdfexport-content']:checked"
+        leftMargin: "#docLeftMargin",
+        rightMargin: "#docRightMargin",
+        topMargin: "#docTopMargin"
     };
 
     /**
@@ -31,6 +47,12 @@ define(function (require, exports) {
      * @type {string}
      */
     var _exportDialogTemplate = _.template(require("text!htmlContent/export-dialog.html"));
+    
+    /**
+     * @private
+     * @type {string}
+     */
+    var _prefsDialogTemplate = _.template(require("text!htmlContent/prefs-dialog.html"));
 
     /**
      * @private
@@ -60,16 +82,21 @@ define(function (require, exports) {
             DefaultDialogs.DIALOG_ID_INFO,
             StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(inputFile)),
             _exportDialogTemplate({ Nls: Nls, Preferences: Preferences }),
-            [
+            [ 
                 {
                     className: Dialogs.DIALOG_BTN_CLASS_NORMAL,
                     id: Dialogs.DIALOG_BTN_CANCEL,
-                    text: Strings.CANCEL
+                    text: Nls.BTN_CANCEL
                 },
                 {
                     className: Dialogs.DIALOG_BTN_CLASS_PRIMARY,
                     id: _ACTION_SAVEAS,
-                    text: Strings.OK
+                    text: Nls.BTN_OK
+                },
+                {
+                    className: Dialogs.DIALOG_BTN_CLASS_LEFT,
+                    id: _ACTION_OPEN_PREFERENCES,
+                    text: Nls.BTN_SET_DEFAULTS
                 }
             ]
         );
@@ -78,10 +105,19 @@ define(function (require, exports) {
             $element = dialog.getElement();
 
             if (action === _ACTION_SAVEAS) {
-                response = {
+                response = { 
+                    content: $element.find(_selectors.content).val(),
                     fontSize: parseInt($element.find(_selectors.fontSize).val(), 10),
-                    content: $element.find(_selectors.content).val()
+                    margins: {
+                        bottom: parseInt($element.find(_selectors.bottomMargin).val(), 10),
+                        left: parseInt($element.find(_selectors.leftMargin).val(), 10),
+                        right: parseInt($element.find(_selectors.rightMargin).val(), 10),
+                        top: parseInt($element.find(_selectors.topMargin).val(), 10),
+                    }
                 };
+            } else if (action === _ACTION_OPEN_PREFERENCES) { 
+                dialog.close();
+                showPreferencesDialog();
             }
 
             deferred.resolve(response);
@@ -89,8 +125,63 @@ define(function (require, exports) {
 
         return deferred.promise();
     }
+    
+    /**
+     * @return {!promise}
+     */
+    function showPreferencesDialog() {
+        var dialog, $element, formField, formValue;
+        
+        dialog = Dialogs.showModalDialog(
+            DefaultDialogs.DIALOG_ID_INFO,
+            Nls.DIALOG_PREFERENCES_TITLE,
+            _prefsDialogTemplate({ Nls: Nls, Preferences: Preferences }),
+            [
+                {
+                    className: Dialogs.DIALOG_BTN_CLASS_NORMAL,
+                    id: Dialogs.DIALOG_BTN_CANCEL,
+                    text: Nls.BTN_CLOSE
+                },
+                {
+                    className: Dialogs.DIALOG_BTN_CLASS_PRIMARY,
+                    id: _ACTION_SAVE_PREFERENCES,
+                    text: Nls.BTN_SAVE_DEFAULTS
+                }
+            ],
+            false
+        );
+        
+        $element = dialog.getElement();
+
+        $element.one("buttonClick", function (event, action) {
+            
+            if (action === _ACTION_SAVE_PREFERENCES) {
+                _selectors.content = "#rangeExport"
+                _.each(_selectors, function(value, index) {
+                    formField = $element.find(_selectors[index]);
+                    formValue = formField.val();
+                    
+                    if (formField.attr("type") === "number") {
+                        formValue = parseInt(formValue, 10);
+                    }
+                    
+                    if (Preferences.getPreference(index) !== formValue) {
+                        Preferences.setPreference(index, formValue);
+                        console.log(Preferences.getPreference(index));
+                    }
+                });
+                dialog.close();
+
+            } else if (action === Dialogs.DIALOG_BTN_CANCEL) {
+                dialog.close();
+            }
+            
+        });
+        
+    };
 
     // Define public API
     exports.showErrorDialog = showErrorDialog;
     exports.showExportDialog = showExportDialog;
+    exports.showPreferencesDialog = showPreferencesDialog; 
 });

@@ -1,0 +1,47 @@
+<form class="form-horizontal">
+    <p></p>
+    <div class="control-group">
+        <label class="control-label" for="docTopMargin"><%= Nls.LABEL_MARGIN_TOP %></label>
+        <div class="controls">
+            <input type="number" id="docTopMargin" placeholder="<%= Nls.LABEL_MARGIN_TOP %>" value="<%= Preferences.getPreference('topMargin') %>" min="0" step="1">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="docLeftMargin"><%= Nls.LABEL_MARGIN_LEFT %></label>
+        <div class="controls">
+            <input type="number" id="docLeftMargin" placeholder="<%= Nls.LABEL_MARGIN_LEFT %>" value="<%= Preferences.getPreference('leftMargin') %>" min="0" step="1">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="docBottomMargin"><%= Nls.LABEL_MARGIN_BOTTOM %></label>
+        <div class="controls">
+            <input type="number" id="docBottomMargin" placeholder="<%= Nls.LABEL_MARGIN_BOTTOM %>" value="<%= Preferences.getPreference('bottomMargin') %>" min="0" step="1">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="docRightMargin"><%= Nls.LABEL_MARGIN_RIGHT %></label>
+        <div class="controls">
+            <input type="number" id="docRightMargin" placeholder="<%= Nls.LABEL_MARGIN_RIGHT %>" value="<%= Preferences.getPreference('rightMargin') %>" min="0" step="1">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="rangeExport"><%= Nls.LABEL_EXPORT_RANGE %></label>
+        <select id="rangeExport">
+            <option value="selection" <% if(Preferences.getPreference('content') === 'selection') { %>selected="selected"<% } %>><%= Nls.LABEL_SELECTION %></option>
+            <option value="whole" <% if(Preferences.getPreference('content') === 'whole') { %>selected="selected"<% } %>><%= Nls.LABEL_WHOLEFILE %></option>
+        </select>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="fontSize"><%= Nls.LABEL_FONTSIZE %></label>
+        <div class="controls">
+            <input type="number" id="pdfexport-fontsize" placeholder="<%= Nls.LABEL_FONTSIZE %>" value="<%= Preferences.getPreference('fontSize') %>" min="0" step="1">
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox" for="openAfterExport">
+                <input type="checkbox" <% if(Preferences.getPreference('openAfterExport')) { %>checked="checked"<% } %> id="openAfterExport"> <%= Nls.LABEL_OPENPDF %>
+            </label>
+        </div>
+    </div>
+</form>

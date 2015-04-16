@@ -13,10 +13,10 @@ define(function (require, exports) {
      * @object
      */
     var defaultPreferences = {
-        "topMargin": { type: "number", value: 72}, //
-        "leftMargin": { type: "number", value: 72 }, //
-        "rightMargin": { type: "number", value: 72 }, //
-        "bottomMargin": { type: "number", value: 72 }, //
+        "topMargin": { type: "number", value: 72}, 
+        "leftMargin": { type: "number", value: 72 }, 
+        "rightMargin": { type: "number", value: 72 }, 
+        "bottomMargin": { type: "number", value: 72 }, 
         "fontSize": { type: "number", value: 10 },
         "rangeExport": { type: "string", value: "whole" },
         "openAfterExport": { type: "boolean", value: 1 }
@@ -42,10 +42,15 @@ define(function (require, exports) {
      * @param {!string/boolean/number} value
      */
     function set(key, value) {
-        /* @TODO: Will be implemented later */
+        return extensionPrefs.set(key, value, {
+            location: {
+                scope: "user"
+            }
+        });
     }
     
     //Define public API
     exports.getPreference = get;
     exports.setPreference = set;
 });
+
