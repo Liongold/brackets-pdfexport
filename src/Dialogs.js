@@ -22,8 +22,12 @@ define(function (require, exports) {
      * @type {object.<string, string>}
      */
     var _selectors = {
+        bottomMargin: "#docBottomMargin",
+        content: "input[name='pdfexport-content']:checked",
         fontSize: "#pdfexport-fontsize",
-        content: "input[name='pdfexport-content']:checked"
+        leftMargin: "#docLeftMargin",
+        rightMargin: "#docRightMargin",
+        topMargin: "#docTopMargin"
     };
 
     /**
@@ -79,8 +83,14 @@ define(function (require, exports) {
 
             if (action === _ACTION_SAVEAS) {
                 response = {
+                    content: $element.find(_selectors.content).val(),
                     fontSize: parseInt($element.find(_selectors.fontSize).val(), 10),
-                    content: $element.find(_selectors.content).val()
+                    margins: {
+                        bottom: parseInt($element.find(_selectors.bottomMargin).val(), 10),
+                        left: parseInt($element.find(_selectors.leftMargin).val(), 10),
+                        right: parseInt($element.find(_selectors.rightMargin).val(), 10),
+                        top: parseInt($element.find(_selectors.topMargin).val(), 10),
+                    }
                 };
             }
 

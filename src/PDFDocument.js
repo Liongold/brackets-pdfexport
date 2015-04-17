@@ -58,12 +58,20 @@ define(function (require, exports, module) {
 
     /**
      * @private
-     * @param {{fontSize: number, pathname: string, text: string}} options
+     * @param {{fontSize: number, pathname: string, text: string, margins: object}} options
      * @return {!promise}
      */
     function create(options) {
+        var PDFKitOptions = {
+            margins: {
+                bottom: options.margins.top,
+                left: options.margins.left,
+                right: options.margins.right,
+                top: options.margins.top
+            }
+        };
         var deferred = new $.Deferred();
-        var pdf = new PDFKit();
+        var pdf = new PDFKit(PDFKitOptions);
         var stream = pdf.pipe(blobStream());
 
         pdf.font(_PDF_FONTFACE, options.fontSize)
