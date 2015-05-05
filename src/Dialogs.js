@@ -37,6 +37,7 @@ define(function (require, exports) {
         bottomMargin: "#docBottomMargin",
         content: "input[name='pdfexport-content']:checked",
         fontSize: "#pdfexport-fontsize",
+        includepagenumbers: "#pdfexport-includepages", 
         leftMargin: "#docLeftMargin",
         rightMargin: "#docRightMargin",
         topMargin: "#docTopMargin"
@@ -105,11 +106,7 @@ define(function (require, exports) {
             $element = dialog.getElement();
 
             if (action === _ACTION_SAVEAS) {
-<<<<<<< HEAD
-                response = { 
-=======
                 response = {
->>>>>>> master
                     content: $element.find(_selectors.content).val(),
                     fontSize: parseInt($element.find(_selectors.fontSize).val(), 10),
                     margins: {
@@ -118,6 +115,7 @@ define(function (require, exports) {
                         right: parseInt($element.find(_selectors.rightMargin).val(), 10),
                         top: parseInt($element.find(_selectors.topMargin).val(), 10),
                     }
+                    includepagenumbers: $element.find(_selectors.includepagenumbers).is(':checked')
                 };
             } else if (action === _ACTION_OPEN_PREFERENCES) { 
                 dialog.close();

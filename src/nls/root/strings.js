@@ -16,6 +16,7 @@ define({
     "LABEL_EXPORT_RANGE":           "Export Range", 
     "LABEL_EXPORT_SELECTION":       "Export Selection",
     "LABEL_EXPORT_CURRENT_FILE":    "Export Current File",
+    "LABEL_INCLUDE_PAGES_FOOTER":   "Include Page Numbers in Footer", 
     "LABEL_MARGINS":                "Margins (in printer points)",
     "LABEL_MARGIN_BOTTOM":          "Bottom Margin", 
     "LABEL_MARGIN_LEFT":            "Left Margin", 
