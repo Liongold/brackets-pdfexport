@@ -26,7 +26,7 @@ module.exports = function(grunt) {
             options: {
                 archive: "<%= pkg.name %>-<%= pkg.version %>.zip"
             },
-            src: ["*.js", "*.json", "thirdparty/**", "nls/**", "htmlContent/**"]
+            src: ["*.js", "*.json", "thirdparty/**", "nls/**", "htmlContent/**", "**.md", "LICENSE"]
         }
     });
 
