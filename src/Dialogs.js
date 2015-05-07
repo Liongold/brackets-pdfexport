@@ -105,11 +105,7 @@ define(function (require, exports) {
             $element = dialog.getElement();
 
             if (action === _ACTION_SAVEAS) {
-<<<<<<< HEAD
-                response = { 
-=======
                 response = {
->>>>>>> master
                     content: $element.find(_selectors.content).val(),
                     fontSize: parseInt($element.find(_selectors.fontSize).val(), 10),
                     margins: {
