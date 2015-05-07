@@ -1,61 +1,40 @@
 module.exports = function(grunt) {
 
-    // Configure project
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON("package.json"),
+
+        // Start setting up tasks
         jshint: {
             options: {
-                jshintrc: '../.jshintrc'
+                jshintrc: "../.jshintrc",
+                force: true
             },
-            all: ['**.js', 'thirdparty/**/**.js']
+            all: ["**.js", "thirdparty/**.js", "nls/**/**.js"]
         },
-        // I'm unsure about how concatenate will work. uglify depends on it. 
-        concat: {
-            options: {
-                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> */\n',
-            },
-            all: {
-                //src: ['FileSystemDomain.js', 'PDFDocument.js', 'Dialogs.js', 'Preferences.js', 'main.js'],
-                src: ['main.js', 'Preferences.js', 'Dialogs.js', 'PDFDocument.js'/*, 'FileSystemDomain.js'*/],
-                dest: 'ExportPDF.js'
-            }
-        },
-        uglify: {
+        /*requirejs: {
             all: {
                 options: {
-                    mangle: false
-                },
-                files: {
-                    'ExportPDF.min.js': 'ExportPDF.js'
-                }
-            }
-        },
-        /*compress: {
-            options: {
-                archive: 'ExportPDF-v<%= pkg.version %>.zip'
-            }
-            files: [
-                
-            ]
-        }*/
-        requirejs: {
-            compile: {
-                options: {
+                    name: "main",
+                    out: "../distribution/main.js",
                     useStrict: true,
-                    out: '../distribution/ExportPDF.js',
-                    name: 'main'
+                    optimise: "uglify2",
+                    uglify2: {}
                 }
             }
+        }*/
+        compress: {
+            options: {
+                archive: "<%= pkg.name %>-<%= pkg.version %>.zip"
+            },
+            src: ["*.js", "*.json", "thirdparty/**", "nls/**", "htmlContent/**"]
         }
     });
 
-    // Load the plugins required
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    //grunt.loadNpmTasks('grunt-contrib-compress');
+    // Load tasks
+    grunt.loadNpmTasks("grunt-contrib-jshint");
+    //grunt.loadNpmTasks("grunt-contrib-requirejs");
+    grunt.loadNpmTasks("grunt-contrib-compress");
 
-    // Register Alias Tasks
-    grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'compress']);
-}
+    // Register Tasks 
+    grunt.registerTask("default", ["jshint", /*"requirejs", */"compress"]);
+};
