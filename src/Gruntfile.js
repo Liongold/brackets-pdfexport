@@ -58,20 +58,30 @@ module.exports = function(grunt) {
            },
            all: {
                files: {
-                   "../brackets-pdfexport/Dialogs.min.js": "Dialogs.js",
-                   "../brackets-pdfexport/FileSystemDomain.min.js": "FileSystemDomain.js",
-                   "../brackets-pdfexport/main.min.js": "main.js",
-                   "../brackets-pdfexport/PDFDocument.min.js": "PDFDocument.js",
-                   "../brackets-pdfexport/Preferences.min.js": "Preferences.js"
+                   "../brackets-pdfexport/Dialogs.js": "Dialogs.js",
+                   "../brackets-pdfexport/FileSystemDomain.js": "FileSystemDomain.js",
+                   "../brackets-pdfexport/main.js": "main.js",
+                   "../brackets-pdfexport/PDFDocument.js": "PDFDocument.js",
+                   "../brackets-pdfexport/Preferences.js": "Preferences.js"
                }
            }
-           
         },
-        compress: {
+        /*compress: {
             options: {
                 archive: "../../<%= pkg.name %>-<%= pkg.version %>.zip"
             },
             src: ["../brackets-pdfexport/**"]
+        }*/
+        compress: {
+            all: {
+                options: {
+                    archive: "../../<%= pkg.name %>.zip"
+                },
+                cwd: "../brackets-pdfexport",
+                src: ["**"],
+                //dest: "<%= pkg.name %>",
+                expand: true
+            }
         }
     });
 

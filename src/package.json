@@ -1,7 +1,7 @@
 {
-  "name": "ExportPDF",
+  "name": "brackets-pdfexport",
   "version": "1.0.0",
-  "title": "PDF Export",
+  "title": "ExportPDF",
   "description": "Export a file or a selection to PDf.",
   "homepage": "https://github.com/Liongold/brackets-pdfexport",
   "author": "Jean Spiteri <beimaginativeegroup@gmail.com>",
@@ -24,5 +24,9 @@
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-uglify": "^0.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Liongold/brackets-pdfexport"
   }
 }
