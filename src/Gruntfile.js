@@ -17,36 +17,36 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         src: ["htmlContent/**"],
-                        dest: "../brackets-pdfexport"
+                        dest: "../distribution"
                     },
                     {
                         expand: true,
                         src: ["nls/**"],
-                        dest: "../brackets-pdfexport"
+                        dest: "../distribution"
                     },
                     {
                         expand: true,
                         src: ["thirdparty/**"],
-                        dest: "../brackets-pdfexport"
+                        dest: "../distribution"
                     },
                     {
                         cwd: "../",
                         expand: true,
                         src:["README.md"],
-                        dest: "../brackets-pdfexport",
+                        dest: "../distribution",
                         filter: "isFile"
                     },
                     {
                         expand: true,
                         src: ["*.json"],
-                        dest: "../brackets-pdfexport",
+                        dest: "../distribution",
                         filter: "isFile"
                     },
                     {
                         cwd: "../",
                         expand: true,
                         src: ["LICENSE"],
-                        dest: "../brackets-pdfexport",
+                        dest: "../distribution",
                         filter: "isFile"
                     }
                 ]
@@ -58,28 +58,21 @@ module.exports = function(grunt) {
            },
            all: {
                files: {
-                   "../brackets-pdfexport/Dialogs.js": "Dialogs.js",
-                   "../brackets-pdfexport/FileSystemDomain.js": "FileSystemDomain.js",
-                   "../brackets-pdfexport/main.js": "main.js",
-                   "../brackets-pdfexport/PDFDocument.js": "PDFDocument.js",
-                   "../brackets-pdfexport/Preferences.js": "Preferences.js"
+                   "../distribution/Dialogs.js": "Dialogs.js",
+                   "../distribution/FileSystemDomain.js": "FileSystemDomain.js",
+                   "../distribution/main.js": "main.js",
+                   "../distribution/PDFDocument.js": "PDFDocument.js",
+                   "../distribution/Preferences.js": "Preferences.js"
                }
            }
         },
-        /*compress: {
-            options: {
-                archive: "../../<%= pkg.name %>-<%= pkg.version %>.zip"
-            },
-            src: ["../brackets-pdfexport/**"]
-        }*/
         compress: {
             all: {
                 options: {
                     archive: "../../<%= pkg.name %>.zip"
                 },
-                cwd: "../brackets-pdfexport",
+                cwd: "../distribution",
                 src: ["**"],
-                //dest: "<%= pkg.name %>",
                 expand: true
             }
         }
