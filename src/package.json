@@ -13,6 +13,7 @@
       }
   ],
   "license": "MIT",
+  "i18n": ["en", "it" ],
   "keywords": [
       "export",
       "pdf"
