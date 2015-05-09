@@ -2,7 +2,7 @@
   "name": "ExportPDF",
   "version": "1.0.0",
   "title": "PDF Export",
-  "description": "Export a file or a selection to PDf.",
+  "description": "Export a file or a selection to PDF.",
   "homepage": "https://github.com/Liongold/brackets-pdfexport",
   "author": "Jean Spiteri <beimaginativeegroup@gmail.com>",
   "contributors": [
