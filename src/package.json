@@ -1,21 +1,33 @@
 {
-  "name": "ExportPDF",
+  "name": "brackets-pdfexport",
   "version": "1.0.0",
-  "title": "PDF Export",
+  "title": "ExportPDF",
   "description": "Export a file or a selection to PDF.",
   "homepage": "https://github.com/Liongold/brackets-pdfexport",
   "author": "Jean Spiteri <beimaginativeegroup@gmail.com>",
   "contributors": [
-      {
-          "email": "hi@sbruchmann.me",
-          "name": "Steffen Bruchmann",
-          "url": "http://sbruchmann.me"
-      }
+    {
+      "email": "hi@sbruchmann.me",
+      "name": "Steffen Bruchmann",
+      "url": "http://sbruchmann.me"
+    }
   ],
   "license": "MIT",
   "i18n": ["en", "it" ],
   "keywords": [
-      "export",
-      "pdf"
-  ]
+    "export",
+    "pdf"
+  ],
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-compress": "^0.13.0",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "grunt-contrib-uglify": "^0.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Liongold/brackets-pdfexport"
+  }
 }
