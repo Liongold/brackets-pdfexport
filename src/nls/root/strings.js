@@ -24,5 +24,6 @@ define({
     "LABEL_MARGIN_TOP":             "Top Margin", 
     "LABEL_OPENPDF":                "Open PDF After Export", 
     "LABEL_SELECTION":              "Selection", 
+    "LABEL_SYNTAX_HIGHLIGHT":       "Add Syntax Highlighting to document",
     "LABEL_WHOLEFILE":              "Whole File" 
 });
