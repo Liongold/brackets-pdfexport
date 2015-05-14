@@ -58,7 +58,7 @@ define(function (require, exports, module) {
 
     /**
      * @private
-     * @param {{fontSize: number, pathname: string, text: string, margins: object, includepagenumbers: boolean}} options
+     * @param {{fontSize: number, pathname: string, text: string, margins: object, includepagenumbers: boolean, syntaxHighlight: boolean}} options
      * @return {!promise}
      */
     function create(options) {
@@ -79,33 +79,95 @@ define(function (require, exports, module) {
         if(options.includePageNumbers) {
             var lines = (options.text).split("\n");
             var pageNumber = 1;
-            var maxNumberOfLinesInPage = Math.floor((pdf.page.height - options.margins.bottom - options.margins.top) /  pdf.currentLineHeight(true));
-            var allowedNumberOfLinesInPage = maxNumberOfLinesInPage - 2;
+            var maxNumberOfLinesInPage = Math.floor((pdf.page.height - options.margins.bottom - options.margins.top) / pdf.currentLineHeight(true));
+            if (options.syntaxHighlight) {
+                var allowedNumberOfLinesInPage = maxNumberOfLinesInPage - (Math.round(options.fontSize / 3));
+            } else {
+                var allowedNumberOfLinesInPage = maxNumberOfLinesInPage - 2;
+            }
             var allowedNumberOfLinesInThisPage = allowedNumberOfLinesInPage;
             var footerX = options.margins.left + 1;
             var footerY = (pdf.page.height - options.margins.bottom - pdf.currentLineHeight(true));
+            var lineTheme = [];
+            var lineText = "";
+            var wordTheme = [];
+            var maxWidthOfPage = pdf.page.width - options.margins.left - options.margins.right;
+            var spaceTaken = 0;
+            var _ = brackets.getModule("thirdparty/lodash");
+            console.log(allowedNumberOfLinesInThisPage);
             for (var i = 0; i < lines.length; i++) {
-                pdf.text(lines[i] + "\n");
-                if(i === allowedNumberOfLinesInThisPage) {
-                    console.log(i);
-                    pdf.text("Page " + pageNumber, footerX, footerY, {
-                        align: "center"
+                if (options.syntaxHighlight) {
+                    lineTheme = options.syntaxText[i];
+                    _.each(lineTheme, function(definition) {
+                        lineText += definition.text;
+                        wordTheme = definition;
+                        pdf.fillColor(definition["style"]);
+                        pdf.text(definition["text"], {
+                            continued: true
+                        });
                     });
-                    pdf.addPage();
-                    pageNumber++;
-                    allowedNumberOfLinesInThisPage = (pageNumber * allowedNumberOfLinesInPage);
-                }
-                //if(pageNumber === 15) {
-                //    break;
-                //}
-                if(i === (lines.length - 1)){
-                    pdf.text("Page " + pageNumber, footerX, footerY, {
-                        align: "center"
+                    pdf.fillColor("#000000");
+                    pdf.text(" ", {
+                        continued: false
                     });
+                    /*if (i !== allowedNumberOfLinesInThisPage) {
+                        pdf.text("\n", {
+                            continued: false
+                        });
+                    }*/
+                    if (options.syntaxHighlight) {
+                        spaceTaken = (pdf.widthOfString(lineText) / maxWidthOfPage);
+                        if (spaceTaken > 1) {
+                            allowedNumberOfLinesInThisPage -= (Math.floor(spaceTaken));
+                        }
+                    }
+                    lineText = "";
+                    if(i === allowedNumberOfLinesInThisPage) {
+                        console.log(i);
+                        console.log("Page " + pageNumber);
+                        pdf.text("Page " + pageNumber, footerX, footerY, {
+                            align: "center"
+                        });
+                        pdf.addPage();
+                        pageNumber++;
+                        allowedNumberOfLinesInThisPage = (pageNumber * allowedNumberOfLinesInPage);
+                        console.log("Allowed Number on next page: "+allowedNumberOfLinesInThisPage);
+                    }
+                    //if(pageNumber === 15) {
+                    //    break;
+                    //}
+                    if(i === (lines.length - 1)){
+                        pdf.text("Page " + pageNumber, footerX, footerY, {
+                            align: "center"
+                        });
+                    }
+                } else {
+                    pdf.text(lines[i] + "\n");
+                    if(i === allowedNumberOfLinesInThisPage) {
+                        console.log(i);
+                        pdf.text("Page " + pageNumber, footerX, footerY, {
+                            align: "center"
+                        });
+                        pdf.addPage();
+                        pageNumber++;
+                        allowedNumberOfLinesInThisPage = (pageNumber * allowedNumberOfLinesInPage);
+                    }
+                    //if(pageNumber === 15) {
+                    //    break;
+                    //}
+                    if(i === (lines.length - 1)){
+                        pdf.text("Page " + pageNumber, footerX, footerY, {
+                            align: "center"
+                        });
+                    }
                 }
             }
         }else{
-           pdf.text(options.text)
+           if (options.syntaxHighlight) {
+                //
+           } else {
+                pdf.text(options.text);
+           }
         }
         
         pdf.save()
