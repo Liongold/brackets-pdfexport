@@ -164,7 +164,26 @@ define(function (require, exports, module) {
             }
         }else{
            if (options.syntaxHighlight) {
-                //
+            var lineTheme = [];
+            var lineText = "";
+            if (options.syntaxHighlight) {
+                var lines = (options.text).split("\n");
+                for (var i = 0; i < lines.length; i++) {
+                    lineTheme = options.syntaxText[i];
+                    _.each(lineTheme, function(definition) {
+                        lineText += definition.text;
+                        wordTheme = definition;
+                        pdf.fillColor(definition["style"]);
+                        pdf.text(definition["text"], {
+                            continued: true
+                        });
+                    });
+                    pdf.fillColor("#000000");
+                    pdf.text(" ", {
+                        continued: false
+                    });
+                    lineText = "";
+                };
            } else {
                 pdf.text(options.text);
            }
