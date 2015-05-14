@@ -20,7 +20,8 @@ define(function (require, exports) {
         "fontSize": { type: "number", value: 10 },
         "rangeExport": { type: "string", value: "whole" },
         "openAfterExport": { type: "boolean", value: 1 },
-        "includepagenumbers": { type: "boolean", value: 0} 
+        "includepagenumbers": { type: "boolean", value: 0 },
+        "syntaxhighlighting": { type: "boolean", value: 0 }
     };
     
     /**
@@ -38,7 +39,7 @@ define(function (require, exports) {
         return extensionPrefs.get(key);
     }
     
-    /**
+    /** - changed
      * @param {!string} key
      * @param {!string/boolean/number} value
      */
@@ -54,4 +55,3 @@ define(function (require, exports) {
     exports.getPreference = get;
     exports.setPreference = set;
 });
-
