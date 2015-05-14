@@ -29,9 +29,9 @@ define(function (require) {
     }
 
     /**
-     * @param {{fontSize: number, pathname: string, text: string, margins: object,includePageNumbers: boolean}} options
+     * @param {{fontSize: number, pathname: string, text: string, margins: object,includePageNumbers: boolean, syntaxHighlight: boolean}} options
      */
-    function _savePDFFile(options) {
+    function _savePDFFile(options) { 
         PDFDocument.create(options)
             .fail(function _handleError() {
                 /**
@@ -48,7 +48,7 @@ define(function (require) {
             text = "",
             smallestSpace = 0;
         var cursorStart, difference, doc, i, indent, line, lines, newLength, newLine, numberOfLines, originalLength, smallestSpace, selectedText, srcFile, text;
-
+        
         if (!editor) {
             return;
         }
@@ -110,6 +110,58 @@ define(function (require) {
             } else {
                 text = doc.getText();
             }
+            
+            if(options.syntaxHighlight) {
+                var docText = [];
+                var specifiedColours = [];
+                var lineTheme = [], fullTheme = [];
+                brackets.getModule(["thirdparty/CodeMirror2/addon/runmode/runmode", "thirdparty/CodeMirror2/lib/codemirror"], function(runmode, codemirror) {
+                    var themeColours = {
+                          keyword: '#cb4b16',
+                          atom: '#d33682',
+                          number: '#009999',
+                          def: '#2aa198',
+                          variable: '#108888',
+                          'variable-2': '#b58900',
+                          'variable-3': '#6c71c4',
+                          property: '#2aa198',
+                          operator: '#6c71c4',
+                          comment: '#999988',
+                          string: '#dd1144',
+                          'string-2': '#009926',
+                          meta: '#768E04',
+                          qualifier: '#b58900',
+                          builtin: '#d33682',
+                          bracket: '#cb4b16',
+                          tag: '#93a1a1',
+                          attribute: '#2aa198',
+                          header: '#586e75',
+                          quote: '#93a1a1',
+                          link: '#93a1a1',
+                          special: '#6c71c4',
+                          default: '#000000'
+                    };
+                    var specifiedColours = [];
+                    var test = text;
+                    var language = brackets.getModule("document/Document");
+                    var lineColoursd = [];
+                    var lines = test.split("\n");
+                    for(var l = 0; l < lines.length; l++){
+                        var line = lines[l];
+                        codemirror.runMode(line, doc.language.getMode(), function(text, style) {
+                            if(!style) { style = "default"; };
+                            lineColoursd.push(themeColours[style]);
+                            docText.push({ text: text/*, style: themeColours[style]*/ });
+                            lineTheme.push({ text: text, style: themeColours[style] });
+                            //console.log("end of loine");
+                        });
+                        specifiedColours.push({ text: docText.text, style: lineColoursd});
+                        lineColoursd = [];
+                        fullTheme.push( lineTheme );
+                        lineTheme = [];
+                    };
+                });
+            };
 
             FileSystem.showSaveDialog(
                 StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(srcFile)),
@@ -122,7 +174,9 @@ define(function (require) {
                         pathname: pathname,
                         text: text,
                         margins: options.margins,
-                        includePageNumbers: options.includepagenumbers 
+                        includePageNumbers: options.includepagenumbers,
+                        syntaxHighlight: options.syntaxHighlight, 
+                        syntaxText: fullTheme //maybe merge with 'text' above
                     });
                 }
             );
