@@ -58,6 +58,11 @@
                         <input type="checkbox" <% if(Preferences.getPreference('openAfterExport')) { %>checked<% } %> id="pdfexport-openfile"><%= Nls.LABEL_OPENPDF %>
                     </label>
                 </div>
+                <div class="control-group"> 
+                    <label class="checkbox" for="pdfexport-includepages">
+                        <input type="checkbox" id="pdfexport-includepages" <% if(Preferences.getPreference('includepagenumbers')) { %>checked<% } %> ><%= Nls.LABEL_INCLUDE_PAGES_FOOTER %>
+                    </label>
+                </div>
             </form>
         </div>
     </div>

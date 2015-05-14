@@ -58,7 +58,7 @@ define(function (require, exports, module) {
 
     /**
      * @private
-     * @param {{fontSize: number, pathname: string, text: string, margins: object}} options
+     * @param {{fontSize: number, pathname: string, text: string, margins: object, includepagenumbers: boolean}} options
      * @return {!promise}
      */
     function create(options) {
@@ -74,9 +74,41 @@ define(function (require, exports, module) {
         var pdf = new PDFKit(PDFKitOptions);
         var stream = pdf.pipe(blobStream());
 
-        pdf.font(_PDF_FONTFACE, options.fontSize)
-           .text(options.text)
-           .save()
+        pdf.font(_PDF_FONTFACE, options.fontSize);
+        
+        if(options.includePageNumbers) {
+            var lines = (options.text).split("\n");
+            var pageNumber = 1;
+            var maxNumberOfLinesInPage = Math.floor((pdf.page.height - options.margins.bottom - options.margins.top) /  pdf.currentLineHeight(true));
+            var allowedNumberOfLinesInPage = maxNumberOfLinesInPage - 2;
+            var allowedNumberOfLinesInThisPage = allowedNumberOfLinesInPage;
+            var footerX = options.margins.left + 1;
+            var footerY = (pdf.page.height - options.margins.bottom - pdf.currentLineHeight(true));
+            for (var i = 0; i < lines.length; i++) {
+                pdf.text(lines[i] + "\n");
+                if(i === allowedNumberOfLinesInThisPage) {
+                    console.log(i);
+                    pdf.text("Page " + pageNumber, footerX, footerY, {
+                        align: "center"
+                    });
+                    pdf.addPage();
+                    pageNumber++;
+                    allowedNumberOfLinesInThisPage = (pageNumber * allowedNumberOfLinesInPage);
+                }
+                //if(pageNumber === 15) {
+                //    break;
+                //}
+                if(i === (lines.length - 1)){
+                    pdf.text("Page " + pageNumber, footerX, footerY, {
+                        align: "center"
+                    });
+                }
+            }
+        }else{
+           pdf.text(options.text)
+        }
+        
+        pdf.save()
            .end();
 
         /**

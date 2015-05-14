@@ -29,7 +29,7 @@ define(function (require) {
     }
 
     /**
-     * @param {{fontSize: number, pathname: string, text: string, margins: object}} options
+     * @param {{fontSize: number, pathname: string, text: string, margins: object,includePageNumbers: boolean}} options
      */
     function _savePDFFile(options) {
         PDFDocument.create(options)
@@ -116,12 +116,13 @@ define(function (require) {
                 FileUtils.getDirectoryPath(srcFile),
                 FileUtils.getBaseName(srcFile) + ".pdf",
                 function _saveDialogCallback(err, pathname) {
-                    _savePDFFile({
+                    _savePDFFile({ 
                         fontSize: options.fontSize,
                         srcFile: srcFile,
                         pathname: pathname,
                         text: text,
-                        margins: options.margins
+                        margins: options.margins,
+                        includePageNumbers: options.includepagenumbers 
                     });
                 }
             );

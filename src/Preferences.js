@@ -19,7 +19,8 @@ define(function (require, exports) {
         "bottomMargin": { type: "number", value: 72 }, 
         "fontSize": { type: "number", value: 10 },
         "rangeExport": { type: "string", value: "whole" },
-        "openAfterExport": { type: "boolean", value: 1 }
+        "openAfterExport": { type: "boolean", value: 1 },
+        "includepagenumbers": { type: "boolean", value: 0} 
     };
     
     /**
