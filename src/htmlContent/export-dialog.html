@@ -63,6 +63,11 @@
                         <input type="checkbox" id="pdfexport-includepages" <% if(Preferences.getPreference('includepagenumbers')) { %>checked<% } %> ><%= Nls.LABEL_INCLUDE_PAGES_FOOTER %>
                     </label>
                 </div>
+                <div class="control-group"> 
+                    <label class="checkbox" for="pdfexport-syntaxhighlight">
+                        <input type="checkbox" id="pdfexport-syntaxhighlight" <% if(Preferences.getPreference('syntaxhighlighting')) { %>checked<% } %> ><%= Nls.LABEL_SYNTAX_HIGHLIGHT %>
+                    </label>
+                </div>
             </form>
         </div>
     </div>
