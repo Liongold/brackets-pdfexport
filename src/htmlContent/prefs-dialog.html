@@ -51,4 +51,11 @@
             </label>
         </div>
     </div>
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox" for="syntaxhighlighting">
+                <input type="checkbox" <% if(Preferences.getPreference('syntaxhighlighting')) { %>checked="checked"<% } %> id="syntaxhighlighting"> <%= Nls.LABEL_SYNTAX_HIGHLIGHTING %>
+            </label>
+        </div>
+    </div>
 </form>
