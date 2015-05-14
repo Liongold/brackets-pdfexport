@@ -34,7 +34,7 @@ _Some of these features are still in development._
 Everyone's welcome to contribute to the development of this extension. There are a number of ways how you can help. If you found a bug, please [report it on Github](https://github.com/Liongold/brackets-pdfexport/issues/new/). You can also help us by contributing code for a new feature you'd like to implement or to fix an already-reported issue. 
 
 ## Acknowledgements
-This extension would not be here if it wasn't for the help of Steffen Bruchmann ([sbruchmann](https://github.com/sbruchmann)). This extension makes use of [PDFKit](https://github.com/devongovett/pdfkit) and [blob-stream](https://github.com/devongovett/blob-stream), two libraries by Devon Govett and other contributors. 
+This extension would not be here if it wasn't for the help of Steffen Bruchmann ([sbruchmann](https://github.com/sbruchmann)). This extension makes use of [PDFKit](https://github.com/devongovett/pdfkit) and [blob-stream](https://github.com/devongovett/blob-stream), two libraries by Devon Govett and other contributors. A very large _grazie_ to ([Denisov21](https://github.com/Denisov21)) who contributed an Italian translation for this extension. 
 
 ## Changelog
 Since the extension is still in heavy development, there are no changelogs being compiled. However, this will change once the first stable release is published. 
