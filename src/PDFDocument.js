@@ -63,7 +63,6 @@ define(function (require, exports, module) {
      * @return {!promise}
      */
     function create(options) {
-        console.log(options);
         var PDFKitOptions = {
             margins: {
                 bottom: options.margins.top,
