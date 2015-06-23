@@ -29,9 +29,9 @@ define(function (require) {
     }
 
     /**
-     * @param {{fontSize: number, pathname: string, text: string, margins: object,includePageNumbers: boolean}} options
+     * @param {{fontSize: number, pathname: string, text: string, margins: object,includePageNumbers: boolean, syntaxHighlight: boolean}} options
      */
-    function _savePDFFile(options) {
+    function _savePDFFile(options) { 
         PDFDocument.create(options)
             .fail(function _handleError() {
                 /**
@@ -45,10 +45,9 @@ define(function (require) {
      */
     function exportAsPdf() {
         var editor = EditorManager.getActiveEditor(),
-            text = "",
             smallestSpace = 0;
         var cursorStart, difference, doc, i, indent, line, lines, newLength, newLine, numberOfLines, originalLength, smallestSpace, selectedText, srcFile, text;
-
+        
         if (!editor) {
             return;
         }
@@ -110,6 +109,53 @@ define(function (require) {
             } else {
                 text = doc.getText();
             }
+            
+            if (options.syntaxHighlight) {
+                var docText = [], specifiedColours = [], lineTheme = [], fullTheme = [], lineColours = [], lines, line;
+                
+                brackets.getModule(["thirdparty/CodeMirror2/addon/runmode/runmode", "thirdparty/CodeMirror2/lib/codemirror"], function(runmode, codemirror) {
+                    /**
+                     * Appropriate colours for final document - taken from PDFKit documentation
+                     */
+                    var themeColours = {
+                        keyword: "#CB4B16",
+                        atom: "#D33682",
+                        number: "#009999",
+                        def: "#2AA198",
+                        variable: "#108888",
+                        'variable-2': "#B58900",
+                        'variable-3': "#6C71C4",
+                        property: "#2AA198",
+                        operator: "#6C71C4",
+                        comment: "#999988",
+                        string: "#DD1144",
+                        'string-2': "#009926",
+                        meta: "#768E04",
+                        qualifier: "#B58900",
+                        builtin: "#D33682",
+                        bracket: "#CB4b16",
+                        tag: "#93A1A1",
+                        attribute: "#2AA198",
+                        header: "#586E75",
+                        quote: "#93A1A1",
+                        link: "#93A1A1",
+                        special: "#6C71C4",
+                        default: "#000000"
+                    };
+                    
+                    lines = text.split("\n");
+                    for (var l = 0; l < lines.length; l++) {
+                        line = lines[l];
+                        codemirror.runMode(line, doc.language.getMode(), function (text, style) {
+                            if (!style) { style = "default"; }; //maybe ternary operator
+                            lineTheme.push( { text: text, style: themeColours[style] } );
+                        });
+                        docText.push(lineTheme);
+                        lineTheme = [];
+                    };
+                    text = docText;
+                });
+            }
 
             FileSystem.showSaveDialog(
                 StringUtils.format(Nls.DIALOG_TITLE, FileUtils.getBaseName(srcFile)),
@@ -122,7 +168,7 @@ define(function (require) {
                         pathname: pathname,
                         text: text,
                         margins: options.margins,
-                        includePageNumbers: options.includepagenumbers 
+                        includePageNumbers: options.includepagenumbers
                     });
                 }
             );
