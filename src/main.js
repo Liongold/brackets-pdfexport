@@ -187,4 +187,11 @@ define(function (require) {
             Menus.AFTER,
             Commands.FILE_SAVE_AS
         );
+    
+    /**
+     * Add onerror handler
+     */
+    window.onerror = function(message) {
+        Dialogs.showErrorDialog(Nls.ERROR_PDFKIT_TITLE, Nls.ERROR_PDFKIT_MSG_WITH_ERROR, message)
+    }
 });
