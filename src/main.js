@@ -32,11 +32,15 @@ define(function (require) {
      * @param {{fontSize: number, pathname: string, text: string, margins: object,includePageNumbers: boolean, syntaxHighlight: boolean}} options
      */
     function _savePDFFile(options) { 
+        $("body").append("<div class='modal-wrapper'><div class='modal-inner-wrapper'><div class='modal-backdrop in' style='z-index:1052;'></div></div></div>");
         PDFDocument.create(options)
             .fail(function _handleError() {
                 /**
                  * @TODO Use error codes in order to simplify displaying of error dialogs
                  */
+            })
+            .always(function () {
+                $(".modal-wrapper").remove();
             });
     }
 
