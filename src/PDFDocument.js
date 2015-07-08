@@ -125,6 +125,8 @@ define(function (require, exports, module) {
             _writeFile(options.pathname, blob)
                 .fail(deferred.reject.bind(deferred))
                 .then(deferred.resolve.bind(deferred));
+                
+            deferred.resolve();
         });
 
         return deferred.promise();

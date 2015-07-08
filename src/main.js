@@ -32,11 +32,15 @@ define(function (require) {
      * @param {{fontSize: number, pathname: string, text: string, margins: object,includePageNumbers: boolean, syntaxHighlight: boolean}} options
      */
     function _savePDFFile(options) { 
+        $("body").append("<div class='modal-wrapper'><div class='modal-inner-wrapper'><div class='modal-backdrop in' style='z-index:1052;'></div></div></div>");
         PDFDocument.create(options)
             .fail(function _handleError() {
                 /**
                  * @TODO Use error codes in order to simplify displaying of error dialogs
                  */
+            })
+            .always(function () {
+                $(".modal-wrapper").remove();
             });
     }
 
@@ -183,4 +187,11 @@ define(function (require) {
             Menus.AFTER,
             Commands.FILE_SAVE_AS
         );
+    
+    /**
+     * Add onerror handler
+     */
+    window.onerror = function(message) {
+        Dialogs.showErrorDialog(Nls.ERROR_PDFKIT_TITLE, Nls.ERROR_PDFKIT_MSG_WITH_ERROR, message)
+    }
 });

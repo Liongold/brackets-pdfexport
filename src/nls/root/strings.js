@@ -8,6 +8,7 @@ define({
     "DIALOG_TITLE":                 "Export {0} as PDF",
     "DIALOG_PREFERENCES_TITLE":     "Export as PDF: Set Defaults", 
     "ERROR_PDFKIT_MSG":             "There was an error while creating the PDF document for {0}.",
+    "ERROR_PDFKIT_MSG_WITH_ERROR":  "There was an error while creating the PDF document due to {0}. Please try again. ",
     "ERROR_PDFKIT_TITLE":           "Unexpected Error",
     "ERROR_UNSUPPORTED_FILE_MSG":   "The following file is not supported and can not be exported as a PDF document: {0}",
     "ERROR_UNSUPPORTED_FILE_TITLE": "Unsupported File",
