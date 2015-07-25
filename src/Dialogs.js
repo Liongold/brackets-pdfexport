@@ -33,6 +33,7 @@ define(function (require, exports) {
      * @private
      * @type {object.<string, string>}
      */
+<<<<<<< HEAD
     var _selectors = { 
         bottomMargin: "#docBottomMargin",
         content: "input[name='pdfexport-content']:checked",
@@ -41,6 +42,11 @@ define(function (require, exports) {
         leftMargin: "#docLeftMargin",
         rightMargin: "#docRightMargin",
         topMargin: "#docTopMargin"
+=======
+    var _selectors = {
+        fontSize: "#pdfexport-fontsize",
+        openPdf: "#pdfexport-openpdf"
+>>>>>>> feature/implement-issue-10
     };
 
     /**
@@ -115,7 +121,8 @@ define(function (require, exports) {
                         right: parseInt($element.find(_selectors.rightMargin).val(), 10),
                         top: parseInt($element.find(_selectors.topMargin).val(), 10),
                     }
-                    includepagenumbers: $element.find(_selectors.includepagenumbers).is(':checked')
+                    includepagenumbers: $element.find(_selectors.includepagenumbers).is(':checked'),
+                    openPdf: $element.find(_selectors.openPdf).prop("checked")
                 };
             } else if (action === _ACTION_OPEN_PREFERENCES) { 
                 dialog.close();

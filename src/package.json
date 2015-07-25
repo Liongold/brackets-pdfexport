@@ -29,5 +29,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Liongold/brackets-pdfexport"
+  },
+  "dependencies": {
+    "opn": "^1.0.0"
   }
 }
