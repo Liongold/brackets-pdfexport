@@ -115,7 +115,7 @@ define(function (require, exports) {
                         left: parseInt($element.find(_selectors.leftMargin).val(), 10),
                         right: parseInt($element.find(_selectors.rightMargin).val(), 10),
                         top: parseInt($element.find(_selectors.topMargin).val(), 10),
-                    }
+                    },
                     includepagenumbers: $element.find(_selectors.includepagenumbers).is(':checked'),
                     openPdf: $element.find(_selectors.openPdf).prop("checked")
                 };
