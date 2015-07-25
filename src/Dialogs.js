@@ -41,7 +41,7 @@ define(function (require, exports) {
         leftMargin: "#docLeftMargin",
         rightMargin: "#docRightMargin",
         topMargin: "#docTopMargin",
-        openPdf: "pdfexport-openpdf"
+        openPdf: "#pdfexport-openpdf"
     };
 
     /**
