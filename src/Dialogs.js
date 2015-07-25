@@ -33,7 +33,6 @@ define(function (require, exports) {
      * @private
      * @type {object.<string, string>}
      */
-<<<<<<< HEAD
     var _selectors = { 
         bottomMargin: "#docBottomMargin",
         content: "input[name='pdfexport-content']:checked",
@@ -41,12 +40,8 @@ define(function (require, exports) {
         includepagenumbers: "#pdfexport-includepages", 
         leftMargin: "#docLeftMargin",
         rightMargin: "#docRightMargin",
-        topMargin: "#docTopMargin"
-=======
-    var _selectors = {
-        fontSize: "#pdfexport-fontsize",
-        openPdf: "#pdfexport-openpdf"
->>>>>>> feature/implement-issue-10
+        topMargin: "#docTopMargin",
+        openPdf: "pdfexport-openpdf"
     };
 
     /**
