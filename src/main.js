@@ -50,7 +50,7 @@ define(function (require) {
     function exportAsPdf() {
         var editor = EditorManager.getActiveEditor(),
             smallestSpace = 0;
-        var cursorStart, difference, doc, i, indent, line, lines, newLength, newLine, numberOfLines, originalLength, regexp, selectedText, srcFile, text;
+        var cursorStart, difference, doc, i, indent, line, lines, newLength, newLine, numberOfLines, originalLength, smallestSpace, selectedText, srcFile, text;
         
         if (!editor) {
             return;
@@ -84,29 +84,29 @@ define(function (require) {
                     newLength = line.trim().length;
                     difference = originalLength - newLength;
                     
-                    if (difference === 0 && i === 0) {
+                    if (difference == 0 && i == 0) {
                         difference = cursorStart;
                     }
                     
-                    if (difference < smallestSpace || i === 0) {
+                    if (difference < smallestSpace || i == 0) {
                         smallestSpace = difference;
                     }
                 }
 
                 indent = (new Array(smallestSpace)).join(" ");
 
-                if (smallestSpace !== 0) {
-                    regexp = new RegExp(indent+"{1}");
+                if (smallestSpace != 0) {
+                    var regexp = new RegExp(indent+"{1}");
                 }
 
                 for (i = 0; i < numberOfLines; i++) {
                     line = lines[i];
                     
-                    if (i === 0 && cursorStart !== 0) {
+                    if (i == 0 && cursorStart != 0) {
                         line = (new Array(cursorStart)).join(" ") + " " + line;
                     }
                     
-                    newLine = line.replace(regexp, "");
+                    var newLine = line.replace(regexp, "");
                     text += newLine + "\n";
                 }  
                 
@@ -115,7 +115,7 @@ define(function (require) {
             }
             
             if (options.syntaxHighlight) {
-                var docText = [], lineTheme = [];
+                var docText = [], specifiedColours = [], lineTheme = [], fullTheme = [], lineColours = [], lines, line;
                 
                 brackets.getModule(["thirdparty/CodeMirror2/addon/runmode/runmode", "thirdparty/CodeMirror2/lib/codemirror"], function(runmode, codemirror) {
                     /**
@@ -127,13 +127,13 @@ define(function (require) {
                         number: "#009999",
                         def: "#2AA198",
                         variable: "#108888",
-                        "variable-2": "#B58900",
-                        "variable-3": "#6C71C4",
+                        'variable-2': "#B58900",
+                        'variable-3': "#6C71C4",
                         property: "#2AA198",
                         operator: "#6C71C4",
                         comment: "#999988",
                         string: "#DD1144",
-                        "string-2": "#009926",
+                        'string-2': "#009926",
                         meta: "#768E04",
                         qualifier: "#B58900",
                         builtin: "#D33682",
@@ -148,19 +148,15 @@ define(function (require) {
                     };
                     
                     lines = text.split("\n");
-                    
                     for (var l = 0; l < lines.length; l++) {
                         line = lines[l];
                         codemirror.runMode(line, doc.language.getMode(), function (text, style) {
-                            if (!style) { 
-                                style = "default"; 
-                            } //maybe ternary operator
+                            if (!style) { style = "default"; }; //maybe ternary operator
                             lineTheme.push( { text: text, style: themeColours[style] } );
                         });
                         docText.push(lineTheme);
                         lineTheme = [];
-                    }
-                    
+                    };
                     text = docText;
                 });
             }
@@ -196,6 +192,6 @@ define(function (require) {
      * Add onerror handler
      */
     window.onerror = function(message) {
-        Dialogs.showErrorDialog(Nls.ERROR_PDFKIT_TITLE, Nls.ERROR_PDFKIT_MSG_WITH_ERROR, message);
-    };
+        Dialogs.showErrorDialog(Nls.ERROR_PDFKIT_TITLE, Nls.ERROR_PDFKIT_MSG_WITH_ERROR, message)
+    }
 });

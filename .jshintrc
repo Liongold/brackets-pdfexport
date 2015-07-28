@@ -5,7 +5,6 @@
     "quotmark": "double",
     "undef": true,
     "unused": true,
-    "loopfunc": true,
     "globals": {
         "$": true,
         "brackets": true,
