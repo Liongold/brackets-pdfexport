@@ -41,7 +41,8 @@ define(function (require, exports) {
         leftMargin: "#docLeftMargin",
         rightMargin: "#docRightMargin",
         topMargin: "#docTopMargin",
-        openPdf: "#pdfexport-openpdf"
+        openPdf: "#pdfexport-openpdf",
+        syntaxHighlight: "#pdfexport-syntaxhighlight"
     };
 
     /**
@@ -117,7 +118,8 @@ define(function (require, exports) {
                         top: parseInt($element.find(_selectors.topMargin).val(), 10),
                     },
                     includepagenumbers: $element.find(_selectors.includepagenumbers).is(":checked"),
-                    openPdf: $element.find(_selectors.openPdf).prop("checked")
+                    openPdf: $element.find(_selectors.openPdf).prop("checked"),
+                    syntaxHighlight: $element.find(_selectors.syntaxHighlight).is(":checked")
                 };
             } else if (action === _ACTION_OPEN_PREFERENCES) { 
                 dialog.close();
