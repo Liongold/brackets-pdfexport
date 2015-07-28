@@ -29,7 +29,7 @@ define(function (require) {
     }
 
     /**
-     * @param {{fontSize: number, pathname: string, text: string, margins: object,includePageNumbers: boolean, syntaxHighlight: boolean}} options
+     * @param {{fontSize: number, openPdf: boolean, pathname: string, text: string, margins: object,includePageNumbers: boolean, syntaxHighlight: boolean}} options
      */
     function _savePDFFile(options) { 
         $("body").append("<div class='modal-wrapper'><div class='modal-inner-wrapper'><div class='modal-backdrop in' style='z-index:1052;'></div></div></div>");
@@ -41,6 +41,11 @@ define(function (require) {
             })
             .always(function () {
                 $(".modal-wrapper").remove();
+            })
+            .then(function() {
+                if (options.openPdf) {
+                    PDFDocument.open(options.pathname);
+                }
             });
     }
 
@@ -172,6 +177,7 @@ define(function (require) {
                 function _saveDialogCallback(err, pathname) {
                     _savePDFFile({ 
                         fontSize: options.fontSize,
+                        openPdf: options.openPdf,
                         srcFile: srcFile,
                         pathname: pathname,
                         text: text,

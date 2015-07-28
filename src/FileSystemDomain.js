@@ -2,6 +2,7 @@
 
 // Dependencies
 var fs = require("fs");
+var opn = require("opn");
 
 /**
  * @const
@@ -22,6 +23,7 @@ function init(manager) {
         });
     }
     manager.registerCommand(_DOMAIN_ID, "write", write, true);
+    manager.registerCommand(_DOMAIN_ID, "open", open);
 }
 
 /**
@@ -34,6 +36,14 @@ function write(pathname, data, done) {
     // Omit file header from input data
     data = data.split(",")[1];
     fs.writeFile(pathname, data, "base64", done);
+}
+
+/**
+ * @public
+ * @param {!string} pathname
+ */
+function open(pathname) {
+    opn(pathname, {});
 }
 
 // Define public API

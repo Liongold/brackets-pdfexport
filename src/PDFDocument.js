@@ -51,7 +51,9 @@ define(function (require, exports, module) {
                         Nls.ERROR_WRITE_MSG,
                         err.errno
                     );
-            });
+                    deferred.reject.bind(deferred);
+                })
+                .then(deferred.resolve.bind(deferred));
         };
 
         return deferred.promise();
@@ -132,6 +134,11 @@ define(function (require, exports, module) {
         return deferred.promise();
     }
 
+    function open(pathname) {
+        _fs.exec("open", pathname);
+    }
+
     // Define public API
     exports.create = create;
+    exports.open = open;
 });
