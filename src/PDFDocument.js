@@ -51,7 +51,9 @@ define(function (require, exports, module) {
                         Nls.ERROR_WRITE_MSG,
                         err.errno
                     );
-            });
+                    deferred.reject.bind(deferred);
+                })
+                .then(deferred.resolve.bind(deferred));
         };
 
         return deferred.promise();
@@ -84,8 +86,8 @@ define(function (require, exports, module) {
             for (var i = 0; i < (options.text).length; i++) {
                 lineTheme = options.text[i];
                 _.each(lineTheme, function(definition) {
-                    pdf.fillColor(definition.style);
-                    pdf.text(definition.text, {
+                    pdf.fillColor(definition["style"]);
+                    pdf.text(definition["text"], {
                         continued: true
                     });
                 });
@@ -132,6 +134,11 @@ define(function (require, exports, module) {
         return deferred.promise();
     }
 
+    function open(pathname) {
+        _fs.exec("open", pathname);
+    }
+
     // Define public API
     exports.create = create;
+    exports.open = open;
 });

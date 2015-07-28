@@ -24,9 +24,9 @@ define(function (require, exports) {
     };
     
     /**
-     * If preferences are not set, set the default ones right now
+     * If preferences are not, set the default ones right now
      */
-    _.each(defaultPreferences, function (definition, key) {
+    _.each(defaultPreferences, function (definition, key, type, value) {
         extensionPrefs.definePreference(key, definition.type, definition.value);
     });
     

@@ -40,7 +40,8 @@ define(function (require, exports) {
         includepagenumbers: "#pdfexport-includepages", 
         leftMargin: "#docLeftMargin",
         rightMargin: "#docRightMargin",
-        topMargin: "#docTopMargin"
+        topMargin: "#docTopMargin",
+        openPdf: "#pdfexport-openpdf"
     };
 
     /**
@@ -115,7 +116,8 @@ define(function (require, exports) {
                         right: parseInt($element.find(_selectors.rightMargin).val(), 10),
                         top: parseInt($element.find(_selectors.topMargin).val(), 10),
                     },
-                    includepagenumbers: $element.find(_selectors.includepagenumbers).is(":checked")
+                    includepagenumbers: $element.find(_selectors.includepagenumbers).is(':checked'),
+                    openPdf: $element.find(_selectors.openPdf).prop("checked")
                 };
             } else if (action === _ACTION_OPEN_PREFERENCES) { 
                 dialog.close();
@@ -158,7 +160,7 @@ define(function (require, exports) {
         $element.one("buttonClick", function (event, action) {
             
             if (action === _ACTION_SAVE_PREFERENCES) {
-                _selectors.content = "#rangeExport";
+                _selectors.content = "#rangeExport"
                 _.each(_selectors, function(value, index) {
                     formField = $element.find(_selectors[index]);
                     formValue = formField.val();
@@ -180,7 +182,7 @@ define(function (require, exports) {
             
         });
         
-    }
+    };
 
     // Define public API
     exports.showErrorDialog = showErrorDialog;
