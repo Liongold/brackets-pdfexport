@@ -20,7 +20,8 @@ define(function (require, exports) {
         "fontSize": { type: "number", value: 10 },
         "rangeExport": { type: "string", value: "whole" },
         "openAfterExport": { type: "boolean", value: 1 },
-        "includepagenumbers": { type: "boolean", value: 0} 
+        "includepagenumbers": { type: "boolean", value: 0 },
+        "syntaxHighlighting": { type:"boolean", value: 0 }
     };
     
     /**

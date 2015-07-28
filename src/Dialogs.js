@@ -37,11 +37,12 @@ define(function (require, exports) {
         bottomMargin: "#docBottomMargin",
         content: "input[name='pdfexport-content']:checked",
         fontSize: "#pdfexport-fontsize",
-        includepagenumbers: "#pdfexport-includepages", 
+        includepagenumbers: "#pdfexport-includepagenumbers", 
         leftMargin: "#docLeftMargin",
         rightMargin: "#docRightMargin",
         topMargin: "#docTopMargin",
-        openPdf: "#pdfexport-openpdf"
+        openPdf: "#pdfexport-openpdf",
+        syntaxHighlight: "#pdfexport-syntaxhighlight"
     };
 
     /**
@@ -117,7 +118,8 @@ define(function (require, exports) {
                         top: parseInt($element.find(_selectors.topMargin).val(), 10),
                     },
                     includepagenumbers: $element.find(_selectors.includepagenumbers).is(":checked"),
-                    openPdf: $element.find(_selectors.openPdf).prop("checked")
+                    openPdf: $element.find(_selectors.openPdf).prop("checked"),
+                    syntaxHighlight: $element.find(_selectors.syntaxHighlight).is(":checked")
                 };
             } else if (action === _ACTION_OPEN_PREFERENCES) { 
                 dialog.close();
