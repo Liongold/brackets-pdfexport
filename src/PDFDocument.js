@@ -84,8 +84,8 @@ define(function (require, exports, module) {
             for (var i = 0; i < (options.text).length; i++) {
                 lineTheme = options.text[i];
                 _.each(lineTheme, function(definition) {
-                    pdf.fillColor(definition["style"]);
-                    pdf.text(definition["text"], {
+                    pdf.fillColor(definition.style);
+                    pdf.text(definition.text, {
                         continued: true
                     });
                 });
