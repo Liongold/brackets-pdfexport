@@ -39,22 +39,22 @@
     </div>
     <div class="control-group">
         <div class="controls">
-            <label class="checkbox" for="openAfterExport">
-                <input type="checkbox" <% if(Preferences.getPreference('openAfterExport')) { %>checked="checked"<% } %> id="openAfterExport"> <%= Nls.LABEL_OPENPDF %>
+            <label class="checkbox" for="pdfexport-openpdf">
+                <input type="checkbox" <% if(Preferences.getPreference('openAfterExport')) { %>checked="checked"<% } %> id="pdfexport-openpdf"> <%= Nls.LABEL_OPENPDF %>
             </label>
         </div>
     </div>
     <div class="control-group">
         <div class="controls">
-            <label class="checkbox" for="includepagenumbers">
-                <input type="checkbox" <% if(Preferences.getPreference('includepagenumbers')) { %>checked="checked"<% } %> id="includepagenumbers"> <%= Nls.LABEL_INCLUDE_PAGES_FOOTER %>
+            <label class="checkbox" for="pdfexport-includepagenumbers">
+                <input type="checkbox" <% if(Preferences.getPreference('includepagenumbers')) { %>checked="checked"<% } %> id="pdfexport-includepagenumbers"> <%= Nls.LABEL_INCLUDE_PAGES_FOOTER %>
             </label>
         </div>
     </div>
     <div class="control-group">
         <div class="controls">
-            <label class="checkbox" for="syntaxhighlighting">
-                <input type="checkbox" <% if(Preferences.getPreference('syntaxhighlighting')) { %>checked="checked"<% } %> id="syntaxhighlighting"> <%= Nls.LABEL_SYNTAX_HIGHLIGHT %>
+            <label class="checkbox" for="pdfexport-syntaxhighlight">
+                <input type="checkbox" <% if(Preferences.getPreference('syntaxHighlighting')) { %>checked="checked"<% } %> id="pdfexport-syntaxhighlight"> <%= Nls.LABEL_SYNTAX_HIGHLIGHT %>
             </label>
         </div>
     </div>

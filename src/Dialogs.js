@@ -37,7 +37,7 @@ define(function (require, exports) {
         bottomMargin: "#docBottomMargin",
         content: "input[name='pdfexport-content']:checked",
         fontSize: "#pdfexport-fontsize",
-        includepagenumbers: "#pdfexport-includepages", 
+        includepagenumbers: "#pdfexport-includepagenumbers", 
         leftMargin: "#docLeftMargin",
         rightMargin: "#docRightMargin",
         topMargin: "#docTopMargin",

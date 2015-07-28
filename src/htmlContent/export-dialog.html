@@ -39,10 +39,10 @@
             <form class="form-horizontal">
                 <div class="control-group">
                     <label class="control-label radio" for="pdfexport-contentselected">
-                        <input type="radio" name="pdfexport-content" value="selection" id="pdfexport-contentselected" <% if(Preferences.getPreference('rangeExport') === 'selection') { %>checked<% } %>> <%= Nls.LABEL_EXPORT_SELECTION %>
+                        <input type="radio" name="pdfexport-content" value="selection" id="pdfexport-contentselected" <% if(Preferences.getPreference('content') === 'selection') { %>checked<% } %>> <%= Nls.LABEL_EXPORT_SELECTION %>
                     </label>
                     <label class="radio" for="pdfexport-contentwhole">
-                        <input type="radio" name="pdfexport-content" value="whole" id="pdfexport-contentwhole" <% if(Preferences.getPreference('rangeExport') === 'whole') { %>checked<% } %>> <%= Nls.LABEL_EXPORT_CURRENT_FILE %>
+                        <input type="radio" name="pdfexport-content" value="whole" id="pdfexport-contentwhole" <% if(Preferences.getPreference('content') === 'whole') { %>checked<% } %>> <%= Nls.LABEL_EXPORT_CURRENT_FILE %>
                     </label>
                 </div>
                 <div class="control-group">
@@ -59,13 +59,13 @@
                     </label>
                 </div>
                 <div class="control-group"> 
-                    <label class="checkbox" for="pdfexport-includepages">
-                        <input type="checkbox" id="pdfexport-includepages" <% if(Preferences.getPreference('includepagenumbers')) { %>checked<% } %> ><%= Nls.LABEL_INCLUDE_PAGES_FOOTER %>
+                    <label class="checkbox" for="pdfexport-includepagenumbers">
+                        <input type="checkbox" id="pdfexport-includepagenumbers" <% if(Preferences.getPreference('includepagenumbers')) { %>checked<% } %> ><%= Nls.LABEL_INCLUDE_PAGES_FOOTER %>
                     </label>
                 </div>
                 <div class="control-group">
                     <label class="checkbox" for="pdfexport-syntaxhighlight">
-                        <input type="checkbox" <% if(Preferences.getPreference('syntaxhighlighting')) { %>checked<% } %> id="pdfexport-syntaxhighlight"><%= Nls.LABEL_SYNTAX_HIGHLIGHT %>
+                        <input type="checkbox" <% if(Preferences.getPreference('syntaxHighlighting')) { %>checked<% } %> id="pdfexport-syntaxhighlight"><%= Nls.LABEL_SYNTAX_HIGHLIGHT %>
                     </label>
                 </div>
             </form>
