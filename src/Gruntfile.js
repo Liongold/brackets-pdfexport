@@ -30,6 +30,11 @@ module.exports = function(grunt) {
                         dest: "../distribution"
                     },
                     {
+                        expand: true,
+                        src: ["node_modules/opn/**"],
+                        dest: "../distribution"
+                    },
+                    {
                         cwd: "../",
                         expand: true,
                         src:["README.md"],
