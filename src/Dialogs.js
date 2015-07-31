@@ -171,6 +171,14 @@ define(function (require, exports) {
                         formValue = parseInt(formValue, 10);
                     }
                     
+                    if (formField.attr("type") === "checkbox") {
+                        if (formField.is(":checked")) {
+                            formValue = 1;
+                        } else {
+                            formValue = 0;
+                        }
+                    }
+                    
                     if (Preferences.getPreference(index) !== formValue) {
                         Preferences.setPreference(index, formValue);
                         console.log(Preferences.getPreference(index));
