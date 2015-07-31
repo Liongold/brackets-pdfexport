@@ -55,7 +55,7 @@
                 </div>
                 <div class="control-group">
                     <label class="checkbox" for="pdfexport-openpdf">
-                        <input type="checkbox" <% if(Preferences.getPreference('openAfterExport')) { %>checked<% } %> id="pdfexport-openpdf"><%= Nls.LABEL_OPENPDF %>
+                        <input type="checkbox" <% if(Preferences.getPreference('openPdf')) { %>checked<% } %> id="pdfexport-openpdf"><%= Nls.LABEL_OPENPDF %>
                     </label>
                 </div>
                 <div class="control-group"> 
@@ -65,7 +65,7 @@
                 </div>
                 <div class="control-group">
                     <label class="checkbox" for="pdfexport-syntaxhighlight">
-                        <input type="checkbox" <% if(Preferences.getPreference('syntaxHighlighting')) { %>checked<% } %> id="pdfexport-syntaxhighlight"><%= Nls.LABEL_SYNTAX_HIGHLIGHT %>
+                        <input type="checkbox" <% if(Preferences.getPreference('syntaxHighlight')) { %>checked<% } %> id="pdfexport-syntaxhighlight"><%= Nls.LABEL_SYNTAX_HIGHLIGHT %>
                     </label>
                 </div>
             </form>

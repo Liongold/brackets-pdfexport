@@ -105,6 +105,7 @@ define(function (require, exports, module) {
             /* Write footer in each page */
             for (var page = 0; page < totalPageCount; page++) {
                 pdf.switchToPage(page);
+                pdf.fillColor("black");
                 pdf.text("Page " + (page + 1), options.margins.left + 1, /*pdf.page.footerStartY()*/ 700, {
                     align: "center"
                 });
