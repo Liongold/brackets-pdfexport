@@ -16,6 +16,7 @@ define({
     "LABEL_EXPORT_RANGE":           "Esporta intervallo", 
     "LABEL_EXPORT_SELECTION":       "Esporta selezione",
     "LABEL_EXPORT_CURRENT_FILE":    "Esporta file corrente",
+    "LABEL_INCLUDE_PAGES_FOOTER":   "Includere numeri di pagina a piè di pagina", 
     "LABEL_MARGINS":                "Margini (in punto di stampa)",
     "LABEL_MARGIN_BOTTOM":          "Margine inferiore", 
     "LABEL_MARGIN_LEFT":            "Margnine sinistro", 
@@ -23,5 +24,6 @@ define({
     "LABEL_MARGIN_TOP":             "Margine alto", 
     "LABEL_OPENPDF":                "Apri il PDF dopo l'esportazione", 
     "LABEL_SELECTION":              "Seleziona", 
+    "LABEL_SYNTAX_HIGHLIGHT":       "Aggiungi evidenziazione della sintassi del documento",
     "LABEL_WHOLEFILE":              "Tutto File" 
 });
