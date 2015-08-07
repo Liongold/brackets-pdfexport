@@ -202,6 +202,9 @@ define(function (require) {
      * Add onerror handler
      */
     window.onerror = function(message) {
-        Dialogs.showErrorDialog(Nls.ERROR_PDFKIT_TITLE, Nls.ERROR_PDFKIT_MSG_WITH_ERROR, message);
+        var regularExpression = /(\/brackets-pdfexport\/)/g;
+        if (regularExpression.test(url)) {
+            Dialogs.showErrorDialog(Nls.ERROR_PDFKIT_TITLE, Nls.ERROR_PDFKIT_MSG_WITH_ERROR, message);
+        }
     };
 });
