@@ -54,8 +54,9 @@ define(function (require) {
      */
     function exportAsPdf() {
         var editor = EditorManager.getActiveEditor(),
-            smallestSpace = 0;
-        var cursorStart, difference, doc, i, indent, line, lines, newLength, newLine, numberOfLines, originalLength, regexp, selectedText, srcFile, text;
+            smallestSpace = 0,
+            text = "";
+        var cursorStart, difference, doc, i, indent, line, lines, newLength, newLine, numberOfLines, originalLength, regexp, selectedText, srcFile;
         
         if (!editor) {
             return;
