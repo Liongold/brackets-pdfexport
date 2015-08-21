@@ -52,7 +52,7 @@ This extension would not be here if it wasn't for the help of Steffen Bruchmann 
 
 ## Changelog
 ### Version 1.0.2 - Released August 21, 2015
-* Fixed an issue when exporting a selected partion only
+* Fixed an issue when exporting a selected portion only
 
 ### Version 1.0.1 - Released August 7, 2015
 * Updated Italian translation (by @Denisov21 - Grazie!)
