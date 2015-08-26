@@ -7,7 +7,7 @@ define({
     "CMD_EXPORT_PDF":               "Esporta come PDF\u2026",
     "DIALOG_TITLE":                 "Esporta {0} come PDF",
     "DIALOG_PREFERENCES_TITLE":     "Esporta come PDF: Impostazioni di Default", 
-    "ERROR_PDFKIT_MSG":             "c'é un errore durante la creazione del documento PDF per {0}.",
+    "ERROR_PDFKIT_MSG":             "C'é un errore durante la creazione del documento PDF per {0}.",
     "ERROR_PDFKIT_TITLE":           "Errore inatteso",
     "ERROR_UNSUPPORTED_FILE_MSG":   "Il seguente file non è supportata e non può essere esportato come documento PDF: {0}",
     "ERROR_UNSUPPORTED_FILE_TITLE": "File non supportato",
@@ -23,7 +23,7 @@ define({
     "LABEL_MARGIN_RIGHT":           "Margine destro", 
     "LABEL_MARGIN_TOP":             "Margine alto", 
     "LABEL_OPENPDF":                "Apri il PDF dopo l'esportazione", 
-    "LABEL_SELECTION":              "Seleziona", 
+    "LABEL_SELECTION":              "Selezione", 
     "LABEL_SYNTAX_HIGHLIGHT":       "Aggiungi evidenziazione della sintassi del documento",
-    "LABEL_WHOLEFILE":              "Tutto File" 
+    "LABEL_WHOLEFILE":              "Tutto il file" 
 });
