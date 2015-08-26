@@ -51,6 +51,9 @@ Everyone's welcome to contribute to the development of this extension. There are
 This extension would not be here if it wasn't for the help of Steffen Bruchmann ([sbruchmann](https://github.com/sbruchmann)). This extension makes use of [PDFKit](https://github.com/devongovett/pdfkit) and [blob-stream](https://github.com/devongovett/blob-stream), two libraries by Devon Govett and other contributors. 
 
 ## Changelog
+### Version 1.0.3 - Released August 26, 2015
+* Fixed two small mistakes in Italian translation
+
 ### Version 1.0.2 - Released August 21, 2015
 * Fixed an issue when exporting a selected portion only
 
