@@ -15,7 +15,8 @@
   "license": "MIT",
   "i18n": [
     "en",
-    "it"
+    "it",
+    "de"
   ],
   "keywords": [
     "export",
