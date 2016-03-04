@@ -1,6 +1,6 @@
 {
   "name": "brackets-pdfexport",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "title": "ExportPDF",
   "description": "Export a file or a selection to PDF.",
   "homepage": "https://github.com/Liongold/brackets-pdfexport",
