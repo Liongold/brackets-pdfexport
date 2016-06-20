@@ -69,7 +69,7 @@ define(function (require, exports, module) {
     function create(options) {
         var PDFKitOptions = {
             margins: {
-                bottom: options.margins.top,
+                bottom: options.margins.bottom,
                 left: options.margins.left,
                 right: options.margins.right,
                 top: options.margins.top
