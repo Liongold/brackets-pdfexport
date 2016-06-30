@@ -1,21 +1,21 @@
 # Export as PDF - Brackets.io Extension
-Export as PDF is an extension designed for Brackets.io that allows the user to export both all or part of the code in the current document to a PDF file which can be then opened by a number of applications such as Adobe Reader. 
+Export as PDF is an extension designed for Brackets.io that allows the user to export both all or part of the code in the current document to a PDF file which can be then opened by a number of applications such as Adobe Reader.
 
-Compatible with Brackets 0.43 and newer. 
+Compatible with Brackets 0.43 and newer.
 
 ## Installation
 
 ### Through the Brackets Extension Manager
 1. Open Brackets
-2. Open the Brackets Extension Manager by opening the 'File' menu and then clicking on the 'Extension Manager...' item. 
-3. In the Search box on the top right of the dialog, type: 'export'. 
-4. Find ExportPDF from the list and then click Install. 
+2. Open the Brackets Extension Manager by opening the 'File' menu and then clicking on the 'Extension Manager...' item.
+3. In the Search box on the top right of the dialog, type: 'export'.
+4. Find ExportPDF from the list and then click Install.
 
 ### From Github
 #### Installing a pre-built release
-1. Go to the [Releases section of our Github repo](https://github.com/Liongold/brackets-pdfexport/releases) in your favourite web browser 
+1. Go to the [Releases section of our Github repo](https://github.com/Liongold/brackets-pdfexport/releases) in your favourite web browser
 2. Choose which release you want to install
-3. Download the clicking the brackets-pdfexport.zip link below the Downloads header. 
+3. Download the clicking the brackets-pdfexport.zip link below the Downloads header.
 4. When the download finishes, open Brackets
 5. Go to Help > Show Extensions Folder
 6. In the File Manager window that opens, go to the "user" folder
@@ -29,7 +29,7 @@ Compatible with Brackets 0.43 and newer.
 5. In the File Manager window that opens, go to the "user" folder
 6. Move the extension zip file from your Downloads folder to the "user" folder
 
-Please note that after each of these methods, Brackets needs to be restarted to make sure that the extension has been installed correctly. 
+Please note that after each of these methods, Brackets needs to be restarted to make sure that the extension has been installed correctly.
 
 ## Features
 * Export all code in current document to PDF
@@ -45,12 +45,16 @@ Please note that after each of these methods, Brackets needs to be restarted to 
 4. Press OK
 
 ## Contributing
-Everyone's welcome to contribute to the development of this extension. There are a number of ways how you can help. If you found a bug, please [report it on Github](https://github.com/Liongold/brackets-pdfexport/issues/new/). You can also help us by contributing code for a new feature you'd like to implement or to fix an already-reported issue. 
+Everyone's welcome to contribute to the development of this extension. There are a number of ways how you can help. If you found a bug, please [report it on Github](https://github.com/Liongold/brackets-pdfexport/issues/new/). You can also help us by contributing code for a new feature you'd like to implement or to fix an already-reported issue.
 
 ## Acknowledgements
-This extension would not be here if it wasn't for the help of Steffen Bruchmann ([sbruchmann](https://github.com/sbruchmann)). This extension makes use of [PDFKit](https://github.com/devongovett/pdfkit) and [blob-stream](https://github.com/devongovett/blob-stream), two libraries by Devon Govett and other contributors. 
+This extension would not be here if it wasn't for the help of Steffen Bruchmann ([sbruchmann](https://github.com/sbruchmann)). This extension makes use of [PDFKit](https://github.com/devongovett/pdfkit) and [blob-stream](https://github.com/devongovett/blob-stream), two libraries by Devon Govett and other contributors.
 
 ## Changelog
+### Version 1.0.5 - Released June 30, 2016
+* Avoid issues with NodeDomain not loading correctly and stopping extension's functionality
+* Fixed an issue with the bottom document margin
+
 ### Version 1.0.4 - Released March 4, 2016
 * Added German translation (by @douira)
 
@@ -68,4 +72,4 @@ This extension would not be here if it wasn't for the help of Steffen Bruchmann 
 * Initial release
 
 ## License
-This extension is licensed under the MIT License. You should receive a copy of this license with the extension. If you do not receive it, please read it online on [Github](https://github.com/Liongold/brackets-pdfexport/blob/master/LICENSE). 
+This extension is licensed under the MIT License. You should receive a copy of this license with the extension. If you do not receive it, please read it online on [Github](https://github.com/Liongold/brackets-pdfexport/blob/master/LICENSE).
