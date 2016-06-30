@@ -44,16 +44,18 @@ define(function (require, exports, module) {
 
         reader.readAsDataURL(blob);
         reader.onloadend = function onLoadEnd() {
-            _fs.exec("write", pathname, reader.result)
-                .fail(function(err) {
-                    Dialogs.showErrorDialog(
-                        Nls.ERROR_PDFKIT_TITLE,
-                        Nls.ERROR_WRITE_MSG,
-                        err.errno
-                    );
-                    deferred.reject.bind(deferred);
-                })
-                .then(deferred.resolve.bind(deferred));
+            _fs._load().then(function () {
+                _fs.exec("write", pathname, reader.result)
+                    .fail(function(err) {
+                        Dialogs.showErrorDialog(
+                            Nls.ERROR_PDFKIT_TITLE,
+                            Nls.ERROR_WRITE_MSG,
+                            err.errno
+                        );
+                        deferred.reject.bind(deferred);
+                    })
+                    .then(deferred.resolve.bind(deferred));
+            });
         };
 
         return deferred.promise();
@@ -67,7 +69,7 @@ define(function (require, exports, module) {
     function create(options) {
         var PDFKitOptions = {
             margins: {
-                bottom: options.margins.top,
+                bottom: options.margins.bottom,
                 left: options.margins.left,
                 right: options.margins.right,
                 top: options.margins.top
@@ -106,7 +108,7 @@ define(function (require, exports, module) {
             for (var page = 0; page < totalPageCount; page++) {
                 pdf.switchToPage(page);
                 pdf.fillColor("black");
-                pdf.text("Page " + (page + 1), options.margins.left + 1, /*pdf.page.footerStartY()*/ 700, {
+                pdf.text("Page " + (page + 1), options.margins.left + 1, 700, {
                     align: "center"
                 });
             }
@@ -136,7 +138,9 @@ define(function (require, exports, module) {
     }
 
     function open(pathname) {
-        _fs.exec("open", pathname);
+        _fs._load().then(function() {
+            _fs.exec("open", pathname);
+        })
     }
 
     // Define public API
